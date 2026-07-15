@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Badge from './design-system/Badge.astro';
+import Icon from './design-system/Icon.astro';
+import DifficultyBadge from './DifficultyBadge.astro';
+
+type ProjectData = CollectionEntry<'projects'>['data'];
+interface Props { project: ProjectData; }
+const { project } = Astro.props;
+const metrics = [
+  { label: 'Build Time', value: project.estimatedTime, icon: 'clock' as const },
+  { label: 'Estimated Cost', value: project.estimatedCost, icon: 'wallet' as const },
+];
+---
+
+<div>
+  <dl class="grid gap-3 sm:grid-cols-3">
+    {metrics.map((metric) => (
+      <div class="surface-card flex items-center gap-3 rounded-[var(--radius-surface)] px-4 py-4">
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700"><Icon name={metric.icon} size={20} /></span>
+        <div>
+          <dt class="text-xs font-extrabold uppercase tracking-[0.12em] text-slate-500">{metric.label}</dt>
+          <dd class="mt-1 font-bold text-slate-950">{metric.value}</dd>
+        </div>
+      </div>
+    ))}
+    <div class="surface-card flex items-center gap-3 rounded-[var(--radius-surface)] px-4 py-4">
+      <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700"><Icon name="gauge" size={20} /></span>
+      <div>
+        <dt class="text-xs font-extrabold uppercase tracking-[0.12em] text-slate-500">Skill Level</dt>
+        <dd class="mt-1"><DifficultyBadge level={project.difficulty} /></dd>
+      </div>
+    </div>
+  </dl>
+
+  <div class="mt-4 flex flex-wrap items-center gap-2" aria-label="Project platform and tags">
+    <Badge tone="neutral"><span class="inline-flex items-center gap-1.5"><Icon name="cpu" size={14} /> {project.platform}</span></Badge>
+    {project.tags.map((tag) => <Badge tone="neutral">{tag}</Badge>)}
+  </div>
+</div>

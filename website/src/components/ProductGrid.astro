@@ -1,0 +1,28 @@
+---
+import ProductCard from './ProductCard.astro';
+import type { Product } from '../data/products';
+import Button from './design-system/Button.astro';
+import Card from './design-system/Card.astro';
+
+interface Props {
+  products: Product[];
+  emptyMessage?: string;
+}
+
+const { products, emptyMessage = 'No reviewed products are listed in this category yet.' } = Astro.props;
+---
+
+{products.length > 0 ? (
+  <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+    {products.map((product) => <ProductCard product={product} />)}
+  </div>
+) : (
+  <Card class="border-dashed p-8 text-center sm:p-10">
+    <p class="text-sm font-semibold text-slate-700">{emptyMessage}</p>
+    <p class="mt-2 text-sm text-slate-500">Explore the reviewed catalog or follow the beginner path with the recommended starter kit.</p>
+    <div class="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
+      <Button href="/products" variant="secondary">View all products</Button>
+      <Button href="/start-here">Start the beginner path</Button>
+    </div>
+  </Card>
+)}

@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PageLayout from './PageLayout.astro';
+import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+import { productById } from '../data/products';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import LastUpdated from '../components/LastUpdated.astro';
+import { buildArticleSchema, buildProductSchema, type BreadcrumbItem } from '../utils/seo';
+
+interface Props { guide: CollectionEntry<'buyingGuides'>; }
+const { guide } = Astro.props;
+const { data } = guide;
+const guideProducts = data.productIds.map((id) => {
+  const product = productById.get(id);
+  if (!product) throw new Error(`Buying guide "${guide.id}" references unknown product "${id}".`);
+  return product;
+});
+const guidePath = `/buying-guides/${guide.id}`;
+const breadcrumbs: BreadcrumbItem[] = [
+  { label: 'Home', href: '/' },
+  { label: 'Buying Guides', href: '/buying-guides' },
+  { label: data.title },
+];
+const articleSchema = buildArticleSchema({
+  title: data.title,
+  description: data.description,
+  path: guidePath,
+  image: data.featuredImage?.src,
+  publishedDate: data.publishedDate,
+  updatedDate: data.updatedDate,
+  section: 'Electronics Buying Guides',
+  tags: data.tags,
+});
+---
+
+<PageLayout title={`${data.title} | Engineering Maker Lab`} description={data.description} contentType="article" image={data.featuredImage} publishedDate={data.publishedDate} updatedDate={data.updatedDate} breadcrumbs={breadcrumbs} structuredData={[articleSchema, ...guideProducts.map(buildProductSchema)]}>
+  <article class="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+    <Breadcrumbs items={breadcrumbs} />
+    <header class="mt-7 max-w-4xl">
+      <p class="text-sm font-bold uppercase tracking-[0.18em] text-orange-600">Buying guide</p>
+      <h1 class="mt-3 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">{data.title}</h1>
+      <p class="mt-5 text-lg leading-8 text-slate-600">{data.summary}</p>
+      <p class="mt-4 text-sm font-semibold text-slate-500">Best for: {data.audience}</p>
+      <div class="mt-4"><LastUpdated date={data.updatedDate} /></div>
+    </header>
+
+    <div class="mt-10"><AffiliateDisclosure /></div>
+    <div class="article-content mt-10"><slot /></div>
+
+    <section class="mt-14 border-t border-slate-200 pt-10">
+      <h2 class="text-3xl font-bold text-slate-900">Recommended products</h2>
+      <div class="mt-7"><ProductGrid products={guideProducts} emptyMessage="No reviewed products match this guide yet." /></div>
+    </section>
+  </article>
+</PageLayout>

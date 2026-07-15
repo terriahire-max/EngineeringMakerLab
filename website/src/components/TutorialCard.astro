@@ -1,0 +1,24 @@
+---
+import Icon from './design-system/Icon.astro';
+import DifficultyBadge from './DifficultyBadge.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  level: string;
+  href: string;
+}
+
+const { title, description, level, href } = Astro.props;
+---
+
+<article class="surface-card surface-card--interactive p-6">
+  <div class="flex items-center justify-between gap-3">
+    <h3 class="text-xl font-semibold text-slate-900">
+      <a href={href} class="transition hover:text-blue-700">{title}</a>
+    </h3>
+    <DifficultyBadge level={level} />
+  </div>
+  <p class="mt-3 text-sm leading-6 text-slate-600">{description}</p>
+  <a href={href} class="text-link mt-5">Read tutorial <Icon name="arrow-right" /></a>
+</article>

@@ -1,0 +1,14 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import QuestionList from './QuestionList.astro';
+
+type Items = CollectionEntry<'projects'>['data']['faq'];
+
+interface Props {
+  items: Items;
+}
+
+const { items } = Astro.props;
+---
+
+<QuestionList items={items} />

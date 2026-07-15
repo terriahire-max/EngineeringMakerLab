@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './design-system/Icon.astro';
+
+type ProjectData = CollectionEntry<'projects'>['data'];
+interface Props {
+  tutorials: ProjectData['relatedTutorials'];
+  buyingGuide: ProjectData['relatedBuyingGuide'];
+}
+const { tutorials, buyingGuide } = Astro.props;
+const resources = [
+  ...tutorials.map((tutorial) => ({ ...tutorial, label: 'Tutorial' })),
+  { ...buyingGuide, label: 'Buying guide' },
+  { title: 'Recommended project kit', href: '#recommended-kit', label: 'Equipment' },
+];
+---
+
+<div class="grid gap-4 sm:grid-cols-2">
+  {resources.map((resource) => (
+    <a href={resource.href} class="surface-card surface-card--interactive flex items-center justify-between gap-4 p-5 text-slate-900 hover:text-blue-700">
+      <span><span class="block text-xs font-bold uppercase tracking-[0.12em] text-slate-500">{resource.label}</span><span class="mt-1 block font-bold">{resource.title}</span></span>
+      <Icon name="arrow-right" class="shrink-0" />
+    </a>
+  ))}
+</div>

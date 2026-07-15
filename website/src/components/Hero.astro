@@ -1,0 +1,46 @@
+---
+import Badge from './design-system/Badge.astro';
+import Button from './design-system/Button.astro';
+---
+
+<section class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:py-20">
+  <div>
+    <div class="mb-4"><Badge>For students, families, and adult beginners</Badge></div>
+    <h1 class="heading-display max-w-2xl">
+      Learn Electronics by Building
+    </h1>
+    <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
+      Engineering Maker Lab is a guided place to learn electronics through practical projects.
+      Build circuits, understand how they work, and choose reusable gear with confidence.
+    </p>
+
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <Button href="/start-here" class="w-full sm:w-auto">Start Here</Button>
+      <Button href="/projects" variant="secondary" class="w-full sm:w-auto">Browse Projects</Button>
+    </div>
+  </div>
+
+  <div class="rounded-[var(--radius-card)] bg-gradient-to-br from-blue-700 to-sky-500 p-[1px] shadow-[var(--shadow-elevated)]">
+    <div class="rounded-[calc(1.5rem-1px)] bg-white p-6 sm:p-8">
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="rounded-2xl bg-slate-50 p-5">
+          <p class="text-sm font-semibold text-slate-500">Get equipped</p>
+          <p class="mt-2 text-2xl font-bold text-slate-900">1. Choose one kit</p>
+          <p class="mt-2 text-sm text-slate-600">Use one reusable set of parts across the learning path.</p>
+        </div>
+        <div class="rounded-2xl bg-slate-50 p-5">
+          <p class="text-sm font-semibold text-slate-500">Build progressively</p>
+          <p class="mt-2 text-2xl font-bold text-slate-900">2. Finish five projects</p>
+          <p class="mt-2 text-sm text-slate-600">Move from a single LED to sensors, motion, and inputs.</p>
+        </div>
+        <div class="rounded-2xl bg-slate-50 p-5 sm:col-span-2">
+          <p class="text-sm font-semibold text-slate-500">Keep learning</p>
+          <p class="mt-2 text-lg font-bold text-slate-900">3. Understand every circuit</p>
+          <p class="mt-2 text-sm text-slate-600">
+            Focused tutorials explain the breadboard, GPIO, PWM, motors, and safe power.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

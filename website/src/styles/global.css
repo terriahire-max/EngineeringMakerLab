@@ -1,0 +1,86 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+@layer base {
+  html { scroll-behavior: smooth; font-family: var(--font-sans); background: var(--surface-canvas); color: var(--text-default); }
+  body { min-width: 320px; margin: 0; background: var(--surface-canvas); color: var(--text-default); font-family: var(--font-sans); line-height: 1.5; text-rendering: optimizeLegibility; }
+  h1, h2, h3, h4 { color: var(--text-strong); text-wrap: balance; }
+  p { text-wrap: pretty; }
+  a, button, summary { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 3px solid transparent; box-shadow: var(--focus-ring); border-radius: var(--radius-control); }
+  ::selection { background: var(--color-brand-200); color: var(--text-strong); }
+  img { height: auto; }
+}
+
+@layer components {
+  .button {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    padding: 0.65rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.25rem;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+  }
+  .button:hover { transform: translateY(-1px); }
+  .button--primary { background: var(--brand-primary); color: white; box-shadow: 0 4px 12px rgb(29 78 216 / 0.2); }
+  .button--primary:hover { background: var(--brand-primary-hover); }
+  .button--conversion { background: var(--brand-conversion); color: white; box-shadow: 0 4px 12px rgb(249 115 22 / 0.2); }
+  .button--conversion:hover { background: var(--brand-conversion-hover); }
+  .button--secondary { border-color: var(--border-strong); background: var(--surface-raised); color: var(--text-default); }
+  .button--secondary:hover { border-color: var(--brand-primary); color: var(--brand-primary); }
+  .button--inverse { border-color: rgb(255 255 255 / 0.16); background: rgb(255 255 255 / 0.08); color: white; }
+  .button--inverse:hover { background: rgb(255 255 255 / 0.14); }
+  .badge { display: inline-flex; align-items: center; border-radius: var(--radius-pill); padding: 0.25rem 0.75rem; font-size: 0.75rem; font-weight: 700; line-height: 1.25rem; }
+  .badge--brand { background: var(--brand-primary-soft); color: var(--brand-primary); }
+  .badge--conversion { background: var(--brand-conversion-soft); color: var(--color-conversion-700); }
+  .badge--neutral { background: #f1f5f9; color: #475569; }
+  .badge--success { background: #ecfdf5; color: #047857; }
+  .badge--advanced { background: #e2e8f0; color: #0f172a; }
+  .surface-card { border: 1px solid var(--border-default); border-radius: var(--radius-card); background: var(--surface-raised); box-shadow: var(--shadow-surface); }
+  .surface-card--interactive { transition: border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease; }
+  .surface-card--interactive:hover { transform: translateY(-2px); border-color: var(--color-brand-200); box-shadow: var(--shadow-elevated); }
+
+  .eyebrow { font-size: 0.75rem; font-weight: 800; line-height: 1.25rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brand-primary); }
+  .heading-display { font-size: clamp(2.5rem, 7vw, 3.75rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.035em; color: var(--text-strong); }
+  .heading-section { font-size: clamp(1.875rem, 4vw, 2.25rem); font-weight: 800; line-height: 1.15; letter-spacing: -0.025em; color: var(--text-strong); }
+  .text-link { display: inline-flex; align-items: center; gap: var(--space-2); font-size: 0.875rem; font-weight: 700; color: var(--brand-primary); text-decoration: none; }
+  .text-link:hover { color: var(--brand-primary-hover); }
+  .text-link svg { transition: transform 160ms ease; }
+  .text-link:hover svg { transform: translateY(-1px); }
+
+  .skip-link { position: fixed; left: var(--space-4); top: var(--space-4); z-index: 100; transform: translateY(-200%); border-radius: var(--radius-control); background: var(--text-strong); padding: .75rem 1rem; font-weight: 700; color: white; transition: transform 160ms ease; }
+  .skip-link:focus { transform: translateY(0); }
+  .nav-scroll { scrollbar-width: none; }
+  .nav-scroll::-webkit-scrollbar { display: none; }
+  .nav-link { position: relative; transition: color 160ms ease; }
+  .nav-link::after { position: absolute; right: .25rem; bottom: .25rem; left: .25rem; height: 2px; transform: scaleX(0); border-radius: 999px; background: var(--brand-primary); content: ''; transition: transform 160ms ease; }
+  .nav-link:hover, .nav-link[aria-current='page'] { color: var(--brand-primary); }
+  .nav-link:hover::after, .nav-link[aria-current='page']::after { transform: scaleX(1); }
+
+  .affiliate-disclosure { border: 1px solid var(--color-conversion-200); border-left: 4px solid var(--brand-conversion); border-radius: var(--radius-surface); background: var(--brand-conversion-soft); box-shadow: var(--shadow-surface); }
+
+  .article-content h2 { margin-top: 2.5rem; font-size: 1.75rem; font-weight: 800; color: rgb(15 23 42); }
+  .article-content h3 { margin-top: 1.75rem; font-size: 1.25rem; font-weight: 700; color: rgb(15 23 42); }
+  .article-content p { margin-top: 1rem; line-height: 1.8; color: rgb(71 85 105); }
+  .article-content ul, .article-content ol { margin-top: 1rem; padding-left: 1.5rem; color: rgb(71 85 105); }
+  .article-content li { margin-top: 0.5rem; line-height: 1.7; }
+  .article-content ul { list-style: disc; }
+  .article-content ol { list-style: decimal; }
+  .article-content code { border-radius: .25rem; background: rgb(241 245 249); padding: .1rem .3rem; color: rgb(30 64 175); }
+  .article-content blockquote { margin-top: 1.5rem; border-left: 4px solid rgb(249 115 22); background: rgb(255 247 237); padding: 1rem 1.25rem; }
+  .article-content blockquote p { margin: 0; color: rgb(67 20 7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+  .button:hover, .surface-card--interactive:hover { transform: none; }
+}

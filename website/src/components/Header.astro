@@ -1,0 +1,28 @@
+---
+import { siteNavigation } from '../data/site';
+import Button from './design-system/Button.astro';
+import Logo from './design-system/Logo.astro';
+
+const currentPath = Astro.url.pathname;
+const isCurrent = (href: string) => href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+---
+
+<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-3 px-4 py-3 sm:px-6 lg:flex-nowrap lg:px-8 lg:py-4">
+    <a href="/" aria-label="Engineering Maker Lab home" class="rounded-xl"><Logo /></a>
+
+    <nav aria-label="Primary navigation" class="nav-scroll order-3 -mx-4 flex w-[calc(100%+2rem)] items-center gap-4 overflow-x-auto px-4 pb-1 sm:-mx-6 sm:w-[calc(100%+3rem)] sm:px-6 lg:order-none lg:mx-0 lg:w-auto lg:overflow-visible lg:px-0 lg:pb-0">
+      {siteNavigation.map((item) => (
+        <a
+          href={item.href}
+          aria-current={isCurrent(item.href) ? 'page' : undefined}
+          class="nav-link whitespace-nowrap rounded-lg px-1 py-2 text-sm font-semibold text-slate-600"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <Button href="/recommended-kits" variant="conversion" class="shrink-0 px-4">Kits</Button>
+  </div>
+</header>

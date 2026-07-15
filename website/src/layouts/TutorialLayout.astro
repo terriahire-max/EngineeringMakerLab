@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PageLayout from './PageLayout.astro';
+import Icon from '../components/design-system/Icon.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import LastUpdated from '../components/LastUpdated.astro';
+import { buildArticleSchema, type BreadcrumbItem } from '../utils/seo';
+
+interface Props {
+  tutorial: CollectionEntry<'tutorials'>;
+}
+
+const { tutorial } = Astro.props;
+const { data } = tutorial;
+const tutorialPath = `/tutorials/${tutorial.id}`;
+const breadcrumbs: BreadcrumbItem[] = [
+  { label: 'Home', href: '/' },
+  { label: 'Tutorials', href: '/tutorials' },
+  { label: data.title },
+];
+const articleSchema = buildArticleSchema({
+  title: data.title,
+  description: data.description,
+  path: tutorialPath,
+  image: data.featuredImage?.src,
+  publishedDate: data.publishedDate,
+  updatedDate: data.updatedDate,
+  section: 'Electronics Tutorials',
+  tags: data.tags,
+});
+---
+
+<PageLayout title={`${data.title} | Engineering Maker Lab`} description={data.description} contentType="article" image={data.featuredImage} publishedDate={data.publishedDate} updatedDate={data.updatedDate} breadcrumbs={breadcrumbs} structuredData={articleSchema}>
+  <article class="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8">
+    <Breadcrumbs items={breadcrumbs} />
+    <header class="mt-7 border-b border-slate-200 pb-10">
+      <div class="flex flex-wrap gap-2">
+        <span class="rounded-full bg-blue-100 px-3 py-1 text-xs font-bold text-blue-800">{data.level}</span>
+        <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700">{data.estimatedTime}</span>
+      </div>
+      <h1 class="mt-5 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">{data.title}</h1>
+      <p class="mt-5 text-lg leading-8 text-slate-600">{data.summary}</p>
+      <div class="mt-4"><LastUpdated date={data.updatedDate} /></div>
+      <div class="mt-5 flex flex-wrap gap-2">
+        {data.tags.map((tag) => <span class="rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-slate-600">{tag}</span>)}
+      </div>
+    </header>
+
+    <div class="article-content mt-10">
+      <slot />
+    </div>
+
+    {data.relatedTutorials.length > 0 && (
+      <section class="mt-14 border-t border-slate-200 pt-10">
+        <h2 class="text-2xl font-bold text-slate-900">Continue learning</h2>
+        <div class="mt-5 grid gap-4 sm:grid-cols-2">
+          {data.relatedTutorials.map((item) => (
+            <a href={item.href} class="surface-card surface-card--interactive flex items-center justify-between p-5 font-bold text-slate-900 hover:text-blue-700">{item.title} <Icon name="arrow-right" /></a>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</PageLayout>

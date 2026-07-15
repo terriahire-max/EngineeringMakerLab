@@ -1,0 +1,20 @@
+---
+import { siteConfig } from '../config/site';
+
+const { googleTagId } = siteConfig.integrations;
+const googleTagSource = googleTagId
+  ? `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(googleTagId)}`
+  : undefined;
+---
+
+{googleTagId && googleTagSource && (
+  <>
+    <script is:inline async src={googleTagSource}></script>
+    <script is:inline define:vars={{ googleTagId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', googleTagId);
+    </script>
+  </>
+)}

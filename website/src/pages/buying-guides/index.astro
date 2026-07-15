@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../../layouts/PageLayout.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import Icon from '../../components/design-system/Icon.astro';
+
+const guides = await getCollection('buyingGuides');
+const pageTitle = 'Buying Guides | Engineering Maker Lab';
+const pageDescription = 'Practical buying guides for beginner electronics kits and tools.';
+---
+
+<PageLayout title={pageTitle} description={pageDescription}>
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+    <SectionHeading headingLevel="h1" eyebrow="Buying guides" title="Choose gear with a clear purpose" description="Practical comparisons built around projects you can actually complete." />
+    <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {guides.map((guide) => (
+        <article class="surface-card surface-card--interactive flex flex-col p-6">
+          <p class="text-xs font-bold uppercase tracking-[0.16em] text-orange-600">Buying guide</p>
+          <h2 class="mt-3 text-xl font-bold text-slate-900"><a href={`/buying-guides/${guide.id}`} class="hover:text-blue-700">{guide.data.title}</a></h2>
+          <p class="mt-3 flex-1 text-sm leading-6 text-slate-600">{guide.data.description}</p>
+          <a href={`/buying-guides/${guide.id}`} class="text-link mt-5">Read guide <Icon name="arrow-right" /></a>
+        </article>
+      ))}
+    </div>
+  </section>
+</PageLayout>

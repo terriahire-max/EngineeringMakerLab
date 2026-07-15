@@ -1,0 +1,27 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
+
+const pageTitle = 'Affiliate Disclosure | Engineering Maker Lab';
+const pageDescription = 'Understand how Engineering Maker Lab selects products and handles affiliate links.';
+---
+
+<PageLayout title={pageTitle} description={pageDescription}>
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+    <SectionHeading
+      headingLevel="h1"
+      eyebrow="Disclosure"
+      title="Affiliate link transparency"
+      description="Product recommendations are chosen for their practical fit with the projects and beginner learning path."
+    />
+
+    <div class="mt-8">
+      <AffiliateDisclosure />
+    </div>
+    <div class="surface-card mt-6 space-y-5 p-6 sm:p-8">
+      <div><h2 class="text-xl font-bold text-slate-950">How affiliate links work</h2><p class="mt-2 leading-7 text-slate-600">A qualifying purchase made through an affiliate link may earn Engineering Maker Lab a commission. The price you pay does not increase because you used the link.</p></div>
+      <div><h2 class="text-xl font-bold text-slate-950">How products are selected</h2><p class="mt-2 leading-7 text-slate-600">Recommendations prioritize project compatibility, beginner usability, component coverage, and long-term usefulness. Affiliate availability does not determine whether a product is included.</p></div>
+    </div>
+  </section>
+</PageLayout>

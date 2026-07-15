@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectMediaPlaceholder from './ProjectMediaPlaceholder.astro';
+
+type Circuit = CollectionEntry<'projects'>['data']['circuit'];
+
+interface Props {
+  circuit: Circuit;
+}
+
+const { circuit } = Astro.props;
+---
+
+{circuit.image ? (
+  <figure>
+    <img src={circuit.image} alt={circuit.alt} width={circuit.width} height={circuit.height} class="w-full rounded-3xl border border-slate-200 bg-white object-contain shadow-sm" loading="lazy" decoding="async" />
+    <figcaption class="mt-3 text-center text-sm text-slate-500">{circuit.title}</figcaption>
+  </figure>
+) : (
+  <ProjectMediaPlaceholder
+    label="Circuit overview"
+    description={`${circuit.title}. Follow the written connection notes and numbered build steps for exact wiring.`}
+    ariaLabel={circuit.alt}
+    variant="circuit"
+  />
+)}

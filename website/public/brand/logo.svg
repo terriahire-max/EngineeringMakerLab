@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="72" viewBox="0 0 360 72" role="img" aria-labelledby="title description">
+  <title id="title">Engineering Maker Lab</title>
+  <desc id="description">A hexagonal circuit mark beside the Engineering Maker Lab wordmark.</desc>
+  <style>
+    .wordmark { fill: #0f172a; }
+    .submark { fill: #1d4ed8; }
+    @media (prefers-color-scheme: dark) { .wordmark { fill: #f8fafc; } .submark { fill: #93c5fd; } }
+  </style>
+  <g transform="translate(4 6)">
+    <path d="M30 0 56 15v30L30 60 4 45V15L30 0Z" fill="#1d4ed8"/>
+    <path d="M17 21h13v18h13" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="17" cy="21" r="4" fill="#f97316"/><circle cx="30" cy="30" r="4" fill="#fff"/><circle cx="43" cy="39" r="4" fill="#f97316"/>
+  </g>
+  <text x="80" y="33" class="wordmark" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="25" font-weight="800" letter-spacing="-.5">Engineering</text>
+  <text x="81" y="54" class="submark" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="3">MAKER LAB</text>
+</svg>

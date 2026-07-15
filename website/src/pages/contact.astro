@@ -1,0 +1,24 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+
+const pageTitle = 'Contact | Engineering Maker Lab';
+const pageDescription = 'Learn what information to include when sharing project feedback or reporting a technical issue.';
+---
+
+<PageLayout title={pageTitle} description={pageDescription}>
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+    <SectionHeading
+      headingLevel="h1"
+      eyebrow="Contact"
+      title="Help us improve the lab"
+      description="Clear, specific feedback helps keep project instructions accurate, approachable, and safe for beginners."
+    />
+
+    <div class="mt-8 rounded-3xl bg-white p-6 shadow-sm shadow-slate-200/60">
+      <p class="text-base leading-7 text-slate-600">
+        When reporting a problem through the channel that directed you to Engineering Maker Lab, include the page title, the step you reached, what you expected, and what happened instead. Never include passwords, account details, or other sensitive information.
+      </p>
+    </div>
+  </section>
+</PageLayout>

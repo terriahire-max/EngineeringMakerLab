@@ -1,0 +1,24 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+
+const pageTitle = 'Privacy | Engineering Maker Lab';
+const pageDescription = 'How Engineering Maker Lab approaches visitor privacy, analytics, and third-party product links.';
+---
+
+<PageLayout title={pageTitle} description={pageDescription}>
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+    <SectionHeading
+      headingLevel="h1"
+      eyebrow="Privacy"
+      title="Privacy policy"
+      description="The site is designed to provide learning content without requiring a visitor account or personal profile."
+    />
+
+    <div class="surface-card mt-8 space-y-6 p-6 sm:p-8">
+      <div><h2 class="text-xl font-bold text-slate-950">Information handling</h2><p class="mt-2 text-base leading-7 text-slate-600">Engineering Maker Lab does not provide user accounts, comments, or on-site purchasing. Hosting providers may process standard request data, such as an IP address and browser details, to deliver and protect the site.</p></div>
+      <div><h2 class="text-xl font-bold text-slate-950">Analytics</h2><p class="mt-2 text-base leading-7 text-slate-600">Analytics support is disabled unless the site owner explicitly configures it. If analytics are enabled, this policy should be reviewed alongside the provider's privacy terms.</p></div>
+      <div><h2 class="text-xl font-bold text-slate-950">External retailers</h2><p class="mt-2 text-base leading-7 text-slate-600">Product links may lead to third-party retailers. Their privacy and purchasing policies apply after you leave this website.</p></div>
+    </div>
+  </section>
+</PageLayout>

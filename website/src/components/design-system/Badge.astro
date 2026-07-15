@@ -1,0 +1,6 @@
+---
+type Tone = 'brand' | 'conversion' | 'neutral' | 'success' | 'advanced';
+interface Props { tone?: Tone; class?: string; }
+const { tone = 'brand', class: className } = Astro.props;
+---
+<span class:list={['badge', `badge--${tone}`, className]}><slot /></span>

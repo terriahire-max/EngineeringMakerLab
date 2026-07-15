@@ -1,0 +1,24 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+
+const pageTitle = 'About | Engineering Maker Lab';
+const pageDescription = 'Learn about the mission behind Engineering Maker Lab and its beginner-first approach.';
+---
+
+<PageLayout title={pageTitle} description={pageDescription}>
+  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+    <SectionHeading
+      headingLevel="h1"
+      eyebrow="About"
+      title="Practical electronics, explained for beginners"
+      description="Engineering Maker Lab helps new makers understand electronics through carefully sequenced, hands-on builds."
+    />
+
+    <div class="mt-8 rounded-3xl bg-white p-6 shadow-sm shadow-slate-200/60">
+      <p class="text-base leading-7 text-slate-600">
+        Each project combines a clear parts list, practical wiring guidance, working code, troubleshooting help, and the underlying concepts. The learning path is designed for middle school and high school students, homeschool families, and adults starting from zero.
+      </p>
+    </div>
+  </section>
+</PageLayout>

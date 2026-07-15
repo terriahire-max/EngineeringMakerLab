@@ -1,0 +1,24 @@
+---
+import Icon from './design-system/Icon.astro';
+
+export type Audience = 'Middle School' | 'High School' | 'Adult Beginners' | 'Homeschool';
+interface Props { audiences: Audience[] | readonly Audience[]; compact?: boolean; }
+const { audiences, compact = false } = Astro.props;
+const audienceIcons: Record<Audience, 'book-open' | 'users' | 'home'> = {
+  'Middle School': 'book-open',
+  'High School': 'book-open',
+  'Adult Beginners': 'users',
+  Homeschool: 'home',
+};
+---
+
+<section aria-labelledby="recommended-for-title" class:list={['surface-card', compact ? 'p-5' : 'p-6 sm:p-7']}>
+  <p id="recommended-for-title" class="eyebrow">Recommended for</p>
+  <ul class="mt-4 flex flex-wrap gap-3">
+    {audiences.map((audience) => (
+      <li class="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-3 py-2 text-sm font-bold text-blue-900">
+        <Icon name={audienceIcons[audience]} size={16} /> {audience}
+      </li>
+    ))}
+  </ul>
+</section>

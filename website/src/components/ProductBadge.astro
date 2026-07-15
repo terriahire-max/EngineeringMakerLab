@@ -1,0 +1,16 @@
+---
+import type { ProductLevel } from '../data/products';
+import Badge from './design-system/Badge.astro';
+
+interface Props {
+  level: ProductLevel;
+  featured?: boolean;
+}
+
+const { level, featured = false } = Astro.props;
+---
+
+<div class="flex flex-wrap gap-2">
+  <Badge>{level}</Badge>
+  {featured && <Badge tone="conversion">Featured</Badge>}
+</div>

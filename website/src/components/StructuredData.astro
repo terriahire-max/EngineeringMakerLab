@@ -1,0 +1,9 @@
+---
+import type { StructuredData } from '../utils/seo';
+
+interface Props { data: StructuredData; }
+const { data } = Astro.props;
+const json = JSON.stringify(data).replaceAll('<', '\\u003c');
+---
+
+<script is:inline type="application/ld+json" set:html={json}></script>

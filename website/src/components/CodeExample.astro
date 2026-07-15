@@ -1,0 +1,22 @@
+---
+import { Code } from 'astro:components';
+import type { CollectionEntry } from 'astro:content';
+
+type ProjectCode = CollectionEntry<'projects'>['data']['code'];
+
+interface Props {
+  example: ProjectCode;
+}
+
+const { example } = Astro.props;
+---
+
+<div class="overflow-hidden rounded-[var(--radius-card)] border border-slate-800 bg-slate-950 shadow-[var(--shadow-surface)]">
+  <div class="flex items-center justify-between border-b border-white/10 px-5 py-3">
+    <span class="font-mono text-xs text-slate-300">{example.filename}</span>
+    <span class="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">{example.language}</span>
+  </div>
+  <div class="overflow-x-auto p-5 text-sm [&_pre]:!bg-transparent [&_pre]:leading-6">
+    <Code code={example.content} lang={example.language} theme="github-dark" />
+  </div>
+</div>

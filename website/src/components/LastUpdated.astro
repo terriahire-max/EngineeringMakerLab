@@ -1,0 +1,14 @@
+---
+interface Props { date: Date; }
+const { date } = Astro.props;
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+}).format(date);
+---
+
+<p class="text-sm font-medium text-slate-500">
+  Last updated <time datetime={date.toISOString()}>{formattedDate}</time>
+</p>

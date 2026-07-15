@@ -1,0 +1,36 @@
+---
+import BuyButtons from './BuyButtons.astro';
+import ProductBadge from './ProductBadge.astro';
+import { hasActiveAffiliateLinks, type Product } from '../data/products';
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+const hasRetailers = hasActiveAffiliateLinks(product.affiliateLinks);
+---
+
+<article class="surface-card surface-card--interactive flex h-full flex-col overflow-hidden">
+  <div class="aspect-[4/3] overflow-hidden border-b border-slate-100 bg-slate-50">
+    <img src={product.image.src} alt={product.image.alt} class="h-full w-full object-cover" width="800" height="600" loading="lazy" decoding="async" />
+  </div>
+  <div class="flex flex-1 flex-col p-6">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">{product.brand}</p>
+        <h3 class="mt-2 text-xl font-bold text-slate-900">{product.name}</h3>
+      </div>
+      <ProductBadge level={product.level} featured={product.featured} />
+    </div>
+    <p class="mt-3 flex-1 text-sm leading-6 text-slate-600">{product.shortDescription}</p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      {product.tags.slice(0, 3).map((tag) => (
+        <span class="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">{tag}</span>
+      ))}
+    </div>
+    {hasRetailers && <div class="mt-5">
+      <BuyButtons links={product.affiliateLinks} stacked={true} />
+    </div>}
+  </div>
+</article>

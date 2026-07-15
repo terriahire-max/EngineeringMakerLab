@@ -1,0 +1,25 @@
+---
+import Icon from './design-system/Icon.astro';
+
+const reasons = [
+  { icon: 'book-open' as const, title: 'Built for first-time makers', description: 'Projects use clear milestones, realistic parts lists, and focused explanations.' },
+  { icon: 'shield-check' as const, title: 'Safety and troubleshooting included', description: 'Voltage limits, power cautions, and common failure modes appear where they matter.' },
+  { icon: 'check' as const, title: 'Transparent recommendations', description: 'Affiliate relationships are disclosed and product links are managed separately from project instructions.' },
+];
+---
+
+<section aria-labelledby="why-trust-title" class="rounded-[var(--radius-card)] bg-slate-950 px-6 py-9 text-white shadow-[var(--shadow-elevated)] sm:px-8">
+  <div class="max-w-3xl">
+    <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-blue-300">Our approach</p>
+    <h2 id="why-trust-title" class="mt-2 text-2xl font-black text-white sm:text-3xl">Why trust Engineering Maker Lab?</h2>
+  </div>
+  <div class="mt-7 grid gap-5 md:grid-cols-3">
+    {reasons.map((reason) => (
+      <div class="rounded-[var(--radius-surface)] border border-white/10 bg-white/5 p-5">
+        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/20 text-blue-200"><Icon name={reason.icon} size={21} /></span>
+        <h3 class="mt-4 font-bold text-white">{reason.title}</h3>
+        <p class="mt-2 text-sm leading-6 text-slate-300">{reason.description}</p>
+      </div>
+    ))}
+  </div>
+</section>

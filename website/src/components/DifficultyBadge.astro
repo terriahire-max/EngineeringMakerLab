@@ -1,0 +1,16 @@
+---
+import Badge from './design-system/Badge.astro';
+
+type Difficulty = 'Beginner' | 'Easy' | 'Intermediate' | 'Advanced';
+interface Props { level: Difficulty | string; }
+const { level } = Astro.props;
+const tones = {
+  Beginner: 'brand',
+  Easy: 'success',
+  Intermediate: 'conversion',
+  Advanced: 'advanced',
+} as const;
+const tone = tones[level as Difficulty] ?? 'neutral';
+---
+
+<Badge tone={tone}>{level}</Badge>

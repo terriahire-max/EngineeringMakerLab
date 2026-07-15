@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Engineering Maker Lab</title>
+  <path d="M32 2 60 18v28L32 62 4 46V18L32 2Z" fill="#1d4ed8"/>
+  <path d="M18 22h14v20h14" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="18" cy="22" r="4.5" fill="#f97316"/><circle cx="32" cy="32" r="4.5" fill="#fff"/><circle cx="46" cy="42" r="4.5" fill="#f97316"/>
+</svg>

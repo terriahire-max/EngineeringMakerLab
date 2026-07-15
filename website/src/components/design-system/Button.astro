@@ -1,0 +1,14 @@
+---
+type Variant = 'primary' | 'conversion' | 'secondary' | 'inverse';
+
+interface Props {
+  href: string;
+  variant?: Variant;
+  rel?: string;
+  class?: string;
+}
+
+const { href, variant = 'primary', rel, class: className } = Astro.props;
+---
+
+<a href={href} rel={rel} class:list={['button', `button--${variant}`, className]}><slot /></a>

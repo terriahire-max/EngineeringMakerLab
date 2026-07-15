@@ -1,0 +1,35 @@
+---
+interface Props {
+  label: string;
+  description: string;
+  ariaLabel: string;
+  variant?: 'hero' | 'circuit';
+}
+
+const { label, description, ariaLabel, variant = 'hero' } = Astro.props;
+---
+
+<div
+  role="img"
+  aria-label={ariaLabel}
+  class:list={[
+    'relative isolate overflow-hidden rounded-3xl border border-blue-200 bg-gradient-to-br from-blue-50 via-white to-orange-50',
+    variant === 'hero' ? 'min-h-80 lg:min-h-[28rem]' : 'min-h-72',
+  ]}
+>
+  <svg class="absolute inset-0 h-full w-full text-blue-700/15" viewBox="0 0 800 500" aria-hidden="true">
+    <path d="M80 130h150v80h140v-80h150v160h120" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M110 360h160v-70h120v70h220" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="80" cy="130" r="17" fill="currentColor" />
+    <circle cx="640" cy="290" r="17" fill="currentColor" />
+    <circle cx="110" cy="360" r="17" fill="currentColor" />
+    <circle cx="610" cy="360" r="17" fill="currentColor" />
+    <circle cx="390" cy="250" r="80" fill="none" stroke="currentColor" stroke-width="8" />
+    <path d="M360 250h60M390 220v60" stroke="currentColor" stroke-width="8" stroke-linecap="round" />
+  </svg>
+
+  <div class="absolute inset-x-6 bottom-6 rounded-2xl border border-white/80 bg-white/90 p-5 shadow-lg shadow-blue-900/5 backdrop-blur sm:inset-x-8 sm:bottom-8">
+    <p class="text-sm font-bold uppercase tracking-[0.18em] text-blue-700">{label}</p>
+    <p class="mt-2 text-sm leading-6 text-slate-600">{description}</p>
+  </div>
+</div>

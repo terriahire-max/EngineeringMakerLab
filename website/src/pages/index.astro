@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ProductCard from '../components/ProductCard.astro';
+import TutorialCard from '../components/TutorialCard.astro';
+import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
+import { products } from '../data/products';
+import Button from '../components/design-system/Button.astro';
+import WhyTrust from '../components/WhyTrust.astro';
+import { sortProjectsByLearningPath, sortTutorialsByLearningPath } from '../utils/content';
+
+const allProjects = await getCollection('projects');
+const allTutorials = await getCollection('tutorials');
+const featuredProjects = sortProjectsByLearningPath(allProjects);
+const featuredTutorials = sortTutorialsByLearningPath(allTutorials);
+
+const pageTitle = 'Engineering Maker Lab';
+const pageDescription = 'A beginner-friendly electronics learning website with practical projects, tutorials, and curated starter gear recommendations.';
+---
+
+<PageLayout title={pageTitle} description={pageDescription}>
+  <Hero />
+
+  <div class="mx-auto max-w-6xl px-4 pb-4 sm:px-6 lg:px-8"><WhyTrust /></div>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <SectionHeading eyebrow="Featured projects" title="Five builds that grow with you" description="Begin with one LED, then add sequencing, motion, sensing, and a complete keypad-controlled system." />
+      <Button href="/projects" variant="secondary">View all projects</Button>
+    </div>
+    <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {featuredProjects.map((project) => (
+        <ProjectCard title={project.data.title} description={project.data.description} tag={project.data.difficulty} href={`/projects/${project.id}`} />
+      ))}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+      <SectionHeading eyebrow="Recommended gear" title="Start with reusable equipment" description="Choose a learning kit and tools that support several projects instead of buying disconnected parts one at a time." />
+      <Button href="/products" variant="secondary">Browse products</Button>
+    </div>
+    <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {products.map((product) => <ProductCard product={product} />)}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+    <SectionHeading eyebrow="Learn the fundamentals" title="Understand what the circuit is doing" description="Five focused tutorials explain the ideas you will use repeatedly across the beginner project path." />
+    <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {featuredTutorials.map((tutorial) => (
+        <TutorialCard title={tutorial.data.title} description={tutorial.data.description} level={tutorial.data.level} href={`/tutorials/${tutorial.id}`} />
+      ))}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pb-16 sm:px-6 lg:px-8"><AffiliateDisclosure /></section>
+</PageLayout>

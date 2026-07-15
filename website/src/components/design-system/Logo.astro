@@ -1,0 +1,22 @@
+---
+interface Props {
+  theme?: 'light' | 'dark';
+  class?: string;
+}
+
+const { theme = 'light', class: className } = Astro.props;
+---
+
+<span class:list={['inline-flex items-center gap-3', theme === 'dark' ? 'text-white' : 'text-slate-950', className]}>
+  <svg width="42" height="42" viewBox="0 0 48 48" fill="none" aria-hidden="true" class="shrink-0">
+    <path d="M24 3.5 42 13.75v20.5L24 44.5 6 34.25v-20.5L24 3.5Z" fill="#1D4ED8" />
+    <path d="M15 17.5h9v13h9" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="15" cy="17.5" r="3" fill="#F97316" />
+    <circle cx="24" cy="24" r="3" fill="white" />
+    <circle cx="33" cy="30.5" r="3" fill="#F97316" />
+  </svg>
+  <span class="leading-none">
+    <span class="block text-[0.95rem] font-black tracking-[-0.025em] sm:text-base">Engineering</span>
+    <span class:list={['mt-1 block text-[0.7rem] font-bold uppercase tracking-[0.18em]', theme === 'dark' ? 'text-blue-300' : 'text-blue-700']}>Maker Lab</span>
+  </span>
+</span>

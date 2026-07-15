@@ -1,0 +1,55 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectMediaPlaceholder from './ProjectMediaPlaceholder.astro';
+import ProjectMetadata from './ProjectMetadata.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import LastUpdated from './LastUpdated.astro';
+import type { BreadcrumbItem } from '../utils/seo';
+
+type ProjectData = CollectionEntry<'projects'>['data'];
+
+interface Props {
+  project: ProjectData;
+  breadcrumbs: BreadcrumbItem[];
+}
+
+const { project, breadcrumbs } = Astro.props;
+---
+
+<header class="mx-auto max-w-6xl px-4 pb-12 pt-10 sm:px-6 lg:px-8 lg:pb-16 lg:pt-14">
+  <Breadcrumbs items={breadcrumbs} />
+
+  <div class="mt-8 grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+    <div>
+      <div class="flex flex-wrap gap-2">
+        <p class="inline-flex rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-800">Build guide</p>
+        {project.featured && <p class="inline-flex rounded-full bg-orange-100 px-3 py-1 text-sm font-semibold text-orange-800">Featured project</p>}
+      </div>
+      <h1 class="mt-4 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">{project.title}</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">{project.summary}</p>
+      <div class="mt-4"><LastUpdated date={project.updatedDate} /></div>
+      <div class="mt-8">
+        <ProjectMetadata project={project} />
+      </div>
+    </div>
+
+    {project.featuredImage.src ? (
+      <img
+        src={project.featuredImage.src}
+        alt={project.featuredImage.alt}
+        class="min-h-80 w-full rounded-3xl border border-slate-200 object-cover shadow-lg lg:min-h-[28rem]"
+        width={project.featuredImage.width}
+        height={project.featuredImage.height}
+        fetchpriority="high"
+        decoding="async"
+      />
+    ) : (
+      <ProjectMediaPlaceholder
+        label="Project illustration"
+        description="A visual reference for this build. Use the parts, wiring, and instruction sections below for exact assembly details."
+        ariaLabel={project.featuredImage.alt}
+        variant="hero"
+      />
+    )}
+  </div>
+</header>

@@ -1,0 +1,45 @@
+---
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+import { sortProjectsByLearningPath } from '../../utils/content';
+
+export const getStaticPaths = (async () => {
+  const projects = await getCollection('projects');
+  const learningPath = sortProjectsByLearningPath(projects);
+  const learningPathIds = new Set(learningPath.map((entry) => entry.id));
+  const navigationProjects = [
+    ...learningPath,
+    ...projects.filter((entry) => !learningPathIds.has(entry.id)).sort((a, b) => a.data.title.localeCompare(b.data.title)),
+  ];
+
+  return projects.map((project) => {
+    const pathIndex = navigationProjects.findIndex((entry) => entry.id === project.id);
+    const previousProject = pathIndex > 0 ? navigationProjects[pathIndex - 1] : undefined;
+    const nextProject = pathIndex >= 0 ? navigationProjects[pathIndex + 1] : undefined;
+    const kitProjects = projects.filter(
+      (entry) => entry.id !== project.id && entry.data.recommendedProductId === project.data.recommendedProductId,
+    );
+
+    return {
+      params: { slug: project.id },
+      props: { project, kitProjects, previousProject, nextProject },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  kitProjects: CollectionEntry<'projects'>[];
+  previousProject?: CollectionEntry<'projects'>;
+  nextProject?: CollectionEntry<'projects'>;
+}
+
+const { project, kitProjects, previousProject, nextProject } = Astro.props;
+const { Content } = await render(project);
+---
+
+<ProjectLayout project={project} kitProjects={kitProjects} previousProject={previousProject} nextProject={nextProject}>
+  <Content />
+</ProjectLayout>

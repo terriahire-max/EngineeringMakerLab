@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type Parts = CollectionEntry<'projects'>['data']['parts'];
+
+interface Props {
+  parts: Parts;
+}
+
+const { parts } = Astro.props;
+---
+
+<div class="surface-card overflow-hidden">
+  <div class="hidden grid-cols-[6rem_1fr_1.2fr] gap-4 border-b border-slate-200 bg-slate-50 px-6 py-3 text-xs font-bold uppercase tracking-[0.16em] text-slate-500 sm:grid">
+    <span>Quantity</span>
+    <span>Part</span>
+    <span>Notes</span>
+  </div>
+  <ul class="divide-y divide-slate-200">
+    {parts.map((part) => (
+      <li class="grid gap-2 px-6 py-4 sm:grid-cols-[6rem_1fr_1.2fr] sm:gap-4">
+        <span class="text-sm font-bold text-blue-700"><span class="sm:hidden">Qty: </span>{part.quantity}</span>
+        <span class="font-semibold text-slate-900">{part.name}</span>
+        <span class="text-sm leading-6 text-slate-600">{part.notes}</span>
+      </li>
+    ))}
+  </ul>
+</div>

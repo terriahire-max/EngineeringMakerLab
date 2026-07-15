@@ -1,0 +1,52 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
+import FeaturedProduct from '../../components/FeaturedProduct.astro';
+import ProductGrid from '../../components/ProductGrid.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { getFeaturedProducts, productCategories, products } from '../../data/products';
+
+const pageTitle = 'Products | Engineering Maker Lab';
+const pageDescription = 'Browse beginner-friendly electronics products by category.';
+const featuredProducts = getFeaturedProducts();
+---
+
+<PageLayout title={pageTitle} description={pageDescription}>
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+    <SectionHeading
+      headingLevel="h1"
+      eyebrow="Product catalog"
+      title="Tools and components for practical builds"
+      description="Browse the reusable Engineering Maker Lab product catalog by category. Retail links are centrally managed and transparently disclosed."
+    />
+
+    {featuredProducts[0] && (
+      <div class="mt-10">
+        <FeaturedProduct product={featuredProducts[0]} />
+      </div>
+    )}
+
+    <div class="mt-16">
+      <h2 class="text-2xl font-bold tracking-tight text-slate-900">Shop by category</h2>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        {productCategories.map((category) => (
+          <a href={`/products/${category.id}`} class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md">
+            <h3 class="font-bold text-slate-900">{category.name}</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">{category.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-16">
+      <h2 class="text-2xl font-bold tracking-tight text-slate-900">All products</h2>
+      <div class="mt-6">
+        <ProductGrid products={products} />
+      </div>
+    </div>
+
+    <div class="mt-12">
+      <AffiliateDisclosure />
+    </div>
+  </section>
+</PageLayout>
