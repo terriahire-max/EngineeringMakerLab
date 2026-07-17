@@ -12,11 +12,11 @@ import ProjectVisual from '../components/ProjectVisual.astro';
 import RecommendedKit from '../components/RecommendedKit.astro';
 import RelatedProjects from '../components/RelatedProjects.astro';
 import Troubleshooting from '../components/Troubleshooting.astro';
-import OfficialResources from '../components/OfficialResources.astro';
+import CompleteOfficialBuildGuide from '../components/CompleteOfficialBuildGuide.astro';
 import ProjectCompletionCTA from '../components/ProjectCompletionCTA.astro';
 import Icon from '../components/design-system/Icon.astro';
-import Button from '../components/design-system/Button.astro';
 import { productById } from '../data/products';
+import { projectResourceById } from '../data/projectResources';
 import { buildArticleSchema, buildProductSchema, type BreadcrumbItem } from '../utils/seo';
 
 interface Props {
@@ -29,26 +29,29 @@ interface Props {
 const { project, previousProject, nextProject } = Astro.props;
 const { data } = project;
 const pageTitle = `${data.title} Project | Engineering Maker Lab`;
-const recommendedProduct = productById.get(data.recommendedProductId);
+const resource = projectResourceById.get(project.id);
+if (!resource) throw new Error(`Project resource data is missing for "${project.id}".`);
+const recommendedProduct = resource.productIds.length > 0 ? productById.get(resource.productIds[0]) : undefined;
 const projectPath = `/projects/${project.id}`;
 const breadcrumbs: BreadcrumbItem[] = [{ label: 'Home', href: '/' }, { label: 'Projects', href: '/projects' }, { label: data.title }];
-if (!recommendedProduct) throw new Error(`Project "${project.id}" references unknown product "${data.recommendedProductId}".`);
-const articleSchema = buildArticleSchema({ title: data.title, description: data.description, path: projectPath, image: data.featuredImage.src, publishedDate: data.publishedDate, updatedDate: data.updatedDate, section: 'Electronics Projects', tags: data.tags });
-const socialImage = data.featuredImage.src ? { src: data.featuredImage.src, alt: data.featuredImage.alt, width: data.featuredImage.width, height: data.featuredImage.height } : undefined;
+if (resource.productIds.length > 0 && !recommendedProduct) throw new Error(`Project "${project.id}" references unknown compatible product "${resource.productIds[0]}".`);
+const showOriginalVisuals = resource.visualMode === 'original-assets';
+const articleSchema = buildArticleSchema({ title: data.title, description: data.description, path: projectPath, image: showOriginalVisuals ? data.featuredImage.src : undefined, publishedDate: data.publishedDate, updatedDate: data.updatedDate, section: 'Electronics Projects', tags: data.tags });
+const socialImage = showOriginalVisuals && data.featuredImage.src ? { src: data.featuredImage.src, alt: data.featuredImage.alt, width: data.featuredImage.width, height: data.featuredImage.height } : undefined;
 ---
 
-<PageLayout title={pageTitle} description={data.description} contentType="article" image={socialImage} publishedDate={data.publishedDate} updatedDate={data.updatedDate} breadcrumbs={breadcrumbs} structuredData={[articleSchema, buildProductSchema(recommendedProduct)]}>
+<PageLayout title={pageTitle} description={data.description} contentType="article" image={socialImage} publishedDate={data.publishedDate} updatedDate={data.updatedDate} breadcrumbs={breadcrumbs} structuredData={[articleSchema, ...(recommendedProduct ? [buildProductSchema(recommendedProduct)] : [])]}>
   <article>
-    <ProjectHero project={data} breadcrumbs={breadcrumbs} />
+    <ProjectHero project={data} breadcrumbs={breadcrumbs} showVisual={showOriginalVisuals} />
 
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8"><RecommendedKit product={recommendedProduct} /></div>
+    {recommendedProduct && <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8"><RecommendedKit product={recommendedProduct} /></div>}
 
     <div class="mx-auto max-w-4xl space-y-12 px-4 py-14 sm:px-6 lg:px-8">
       <ProjectSection id="build" eyebrow="Project overview" title="What You Will Build">
         <div class="article-content"><slot /></div>
       </ProjectSection>
 
-      {data.visuals?.finished && <ProjectSection id="finished" eyebrow="The result" title="Finished Project"><ProjectVisual {...data.visuals.finished} caption="Finished project reference" /></ProjectSection>}
+      {showOriginalVisuals && data.visuals?.finished && <ProjectSection id="finished" eyebrow="The result" title="Finished Project"><ProjectVisual {...data.visuals.finished} caption="Finished project reference" /></ProjectSection>}
 
       <ProjectSection id="learn" eyebrow="Skills" title="What You Will Learn">
         <ul class="grid gap-4 sm:grid-cols-2">{data.learningGoals.map((goal) => <li class="flex gap-3 rounded-2xl border border-blue-100 bg-blue-50/60 p-4 text-sm font-medium leading-6 text-slate-800"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-700 text-white"><Icon name="check" size={14} /></span>{goal}</li>)}</ul>
@@ -58,15 +61,13 @@ const socialImage = data.featuredImage.src ? { src: data.featuredImage.src, alt:
 
       {data.teacherTip && <ProjectSection id="teacher-tip" eyebrow="Engineering insight" title="Engineering Teacher Tip"><div class="rounded-2xl border border-orange-200 bg-orange-50 p-6 leading-7 text-slate-800">{data.teacherTip}</div></ProjectSection>}
 
-      {data.officialGuide && <ProjectSection id="official-guide" eyebrow="For kit owners" title={data.officialGuide.title} description={data.officialGuide.description}><Button href={data.officialGuide.href} target="_blank" rel="noopener noreferrer" variant="secondary" ariaLabel={`${data.officialGuide.buttonLabel} (opens in a new tab)`}>{data.officialGuide.buttonLabel}</Button></ProjectSection>}
+      <ProjectSection id="official-guide" eyebrow="Verified resource" title="Complete Official Build Guide"><CompleteOfficialBuildGuide resource={resource} /></ProjectSection>
 
-      {!data.officialGuide && data.officialResources && <ProjectSection id="official-resources" eyebrow="Vendor guidance" title="Official Resources" description="These vendor resources provide the complete kit-specific walkthrough."><OfficialResources resources={data.officialResources} /></ProjectSection>}
+      {showOriginalVisuals && data.visuals?.breadboard && <ProjectSection id="breadboard" eyebrow="Wiring" title="Breadboard Wiring"><ProjectVisual {...data.visuals.breadboard} caption="Original breadboard wiring layout" /></ProjectSection>}
 
-      {data.visuals?.breadboard && <ProjectSection id="breadboard" eyebrow="Wiring" title="Breadboard Wiring"><ProjectVisual {...data.visuals.breadboard} caption="Simplified original breadboard wiring layout" /></ProjectSection>}
+      {showOriginalVisuals && data.circuit && <ProjectSection id="circuit" eyebrow="Wiring" title="Circuit Diagram" description={data.circuit.description}><CircuitDiagramPlaceholder circuit={data.circuit} /></ProjectSection>}
 
-      {data.circuit && <ProjectSection id="circuit" eyebrow="Wiring" title="Circuit Diagram" description={data.circuit.description}><CircuitDiagramPlaceholder circuit={data.circuit} /></ProjectSection>}
-
-      <ProjectSection id="code" eyebrow="Programming concept" title="MicroPython Concept Summary" description={`This short, independently written example shows the GPIO output and timing pattern used to blink an LED. Compare pin choices and wiring with the official guide before running ${data.code.filename}.`}><CodeExample example={data.code} /></ProjectSection>
+      <ProjectSection id="code" eyebrow="Original preparation" title="Original Code and Preparation Notes" description={`This independently written example summarizes the programming concept used by the project. Compare wiring and pin choices with the verified official guide, when available, before running ${data.code.filename}.`}><CodeExample example={data.code} /></ProjectSection>
 
       {data.codeExplanation && <ProjectSection id="code-explanation" eyebrow="Understand it" title="How the Code Works"><ol class="space-y-3 text-slate-700">{data.codeExplanation.map((item) => <li class="rounded-xl border border-slate-200 bg-white p-4 leading-7">{item}</li>)}</ol></ProjectSection>}
 

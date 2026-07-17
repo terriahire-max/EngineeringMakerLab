@@ -1,6 +1,6 @@
 ---
 import type { Product } from '../data/products';
-import { isActiveAffiliateLink } from '../data/products';
+import { getProductCtaLabel, isActiveAffiliateLink } from '../data/products';
 import Breadcrumbs from './Breadcrumbs.astro';
 import AffiliateDisclosure from './AffiliateDisclosure.astro';
 import BuyButtons from './BuyButtons.astro';
@@ -52,8 +52,7 @@ if (import.meta.env.DEV) kits.filter((kit) => !kit.active).forEach((kit) => cons
       </div>
       <div class="mt-7 grid gap-3 sm:grid-cols-2 lg:flex lg:flex-wrap">
         <Button href={`/products/${product.id}`} variant="secondary" class="w-full lg:w-auto">View {profile.comparisonLabel} Details</Button>
-        {active && <div class="w-full sm:col-span-2 lg:w-auto"><BuyButtons links={product.affiliateLinks} preferredVendor="SunFounder" buttonLabel={`Get the ${profile.comparisonLabel} Kit`} activeOnly={true} /></div>}
-        <Button href={profile.officialProductUrl} target="_blank" rel="noopener noreferrer" variant="secondary" class="w-full lg:w-auto" ariaLabel={`Open the official ${profile.comparisonLabel} product page (opens in a new tab)`}>Official product page</Button>
+        {active && <div class="w-full sm:col-span-2 lg:w-auto"><BuyButtons links={product.affiliateLinks} preferredVendor="SunFounder" buttonLabel={getProductCtaLabel(product)} activeOnly={true} /></div>}
         <Button href={profile.officialDocumentationUrl} target="_blank" rel="noopener noreferrer" variant="secondary" class="w-full lg:w-auto" ariaLabel={`Open the official ${profile.comparisonLabel} documentation (opens in a new tab)`}>Official documentation</Button>
       </div>
       {active && <p class="mt-4 text-xs leading-5 text-slate-500">Affiliate link: Engineering Maker Lab may earn a commission at no additional cost to you.</p>}

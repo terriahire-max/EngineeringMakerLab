@@ -35,7 +35,7 @@ const projects = defineCollection({
     estimatedTime: z.string(),
     estimatedCost: z.string(),
     platform: z.string(),
-    recommendedProductId: z.string(),
+    recommendedProductId: z.string().optional(),
     featuredImage: z.object({
       src: z.string().optional(),
       alt: z.string(),

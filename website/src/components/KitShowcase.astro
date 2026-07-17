@@ -1,5 +1,6 @@
 ---
-import type { Product } from '../data/products';
+import { getProductCtaLabel, type Product } from '../data/products';
+import { getProjectActionLabel, getProjectHref, projectResourceById } from '../data/projectResources';
 import BuyButtons from './BuyButtons.astro';
 import DifficultyBadge from './DifficultyBadge.astro';
 import Icon from './design-system/Icon.astro';
@@ -39,7 +40,7 @@ const displayedProjects = compact ? profile.projects.slice(0, 4) : profile.proje
     <div class="self-start rounded-2xl border border-orange-400/30 bg-white/5 p-5 sm:p-6">
       <p class="text-sm font-bold text-white">Begin with one reusable kit</p>
       <p class="mt-2 text-sm leading-6 text-slate-300">Use the same core components across several progressively more capable builds.</p>
-      <div class="mt-5"><BuyButtons links={product.affiliateLinks} preferredVendor="SunFounder" buttonLabel="Get the Thales Starter Kit" activeOnly={true} stacked={true} /></div>
+      <div class="mt-5"><BuyButtons links={product.affiliateLinks} preferredVendor="SunFounder" buttonLabel={getProductCtaLabel(product)} activeOnly={true} stacked={true} /></div>
       <div class="mt-3"><Button href={detailUrl} variant="inverse" class="w-full">Explore Projects <Icon name="arrow-right" /></Button></div>
       <p class="mt-4 text-xs leading-5 text-slate-300">Affiliate link: Engineering Maker Lab may earn a commission at no additional cost to you.</p>
     </div>
@@ -62,14 +63,20 @@ const displayedProjects = compact ? profile.projects.slice(0, 4) : profile.proje
     <section aria-labelledby={`${product.id}-projects`}>
       <SectionTitleTag id={`${product.id}-projects`} class="text-2xl font-black text-slate-900">What You Can Build</SectionTitleTag>
       <div class="mt-6 grid gap-4 md:grid-cols-2">
-        {displayedProjects.map((project) => (
+        {displayedProjects.map((project) => {
+          const resource = projectResourceById.get(project.projectId);
+          if (!resource) throw new Error(`Project resource data is missing for "${project.projectId}".`);
+          const href = getProjectHref(resource);
+          const external = resource.status !== 'published' && Boolean(resource.officialGuideUrl);
+          return (
           <article class="rounded-2xl border border-slate-200 p-5">
             <div class="flex flex-wrap items-center gap-3"><DifficultyBadge level={project.difficulty} />{project.estimatedTime && <span class="inline-flex items-center gap-1 text-xs font-semibold text-slate-500"><Icon name="clock" size={15} />{project.estimatedTime}</span>}</div>
-            <ProjectTitleTag class="mt-3 text-lg font-bold text-slate-900">{project.title}</ProjectTitleTag>
+            <ProjectTitleTag class="mt-3 text-lg font-bold text-slate-900">{href ? <a href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined} class="transition underline decoration-transparent underline-offset-4 hover:text-blue-700 hover:decoration-blue-300 visited:text-slate-700">{resource.title}</a> : resource.title}</ProjectTitleTag>
             <p class="mt-2 text-sm leading-6 text-slate-600">{project.description}</p>
-            {project.href ? <a href={project.href} class="text-link mt-4" aria-label={`View the ${project.title} project`}>View project <Icon name="arrow-right" /></a> : <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Included in the kit curriculum</p>}
+            {href ? <a href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined} class="text-link mt-4" aria-label={`${getProjectActionLabel(resource)}: ${resource.title}${external ? ' (opens in a new tab)' : ''}`}>{getProjectActionLabel(resource)} <Icon name="arrow-right" /></a> : <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Planned</p>}
           </article>
-        ))}
+          );
+        })}
       </div>
       {!detailPage && <div class="mt-6"><Button href={detailUrl} variant="secondary">View All Projects for This Kit <Icon name="arrow-right" /></Button></div>}
     </section>

@@ -8,7 +8,6 @@ difficulty: Intermediate
 estimatedTime: 50-75 minutes
 estimatedCost: $12-$20
 platform: Raspberry Pi Pico
-recommendedProductId: sunfounder-raspberry-pi-pico-ultimate-starter-kit
 featuredImage:
   alt: HC-SR04 ultrasonic sensor wired to a Raspberry Pi Pico
   width: 1200

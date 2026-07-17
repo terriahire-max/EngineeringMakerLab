@@ -25,11 +25,11 @@ export interface KitComponent {
 }
 
 export interface KitProject {
+  projectId: string;
   title: string;
   description: string;
   difficulty: ProductLevel;
   estimatedTime?: string;
-  href?: string;
 }
 
 export interface KitSalesProfile {
@@ -52,13 +52,14 @@ export interface PicoKitProfile {
   explanation: string;
   selectedComponents?: string[];
   learningAreas: string[];
-  projectExamples: string[];
+  projectIds: string[];
   officialProductUrl: string;
   officialDocumentationUrl: string;
 }
 
 export interface Product {
   id: string;
+  ctaLabel?: string;
   name: string;
   brand: string;
   category: ProductCategoryId;
@@ -111,6 +112,12 @@ export function hasActiveAffiliateLinks(links: AffiliateLinks): boolean {
     .some(isActiveAffiliateLink);
 }
 
+export function getProductCtaLabel(product: Product): string {
+  if (product.ctaLabel) return product.ctaLabel;
+  const shortName = product.name.split(/\s+[–—-]\s+/).at(-1)?.trim() || product.name;
+  return `Get the ${shortName} Kit`;
+}
+
 export const productCategories: ProductCategory[] = [
   { id: 'starter-kits', name: 'Starter Kits', description: 'All-in-one component collections for a confident first build.' },
   { id: 'raspberry-pi-pico', name: 'Raspberry Pi Pico', description: 'Boards, kits, and accessories for the Pico platform.' },
@@ -127,6 +134,7 @@ export const productCategories: ProductCategory[] = [
 export const products: Product[] = [
   {
     id: 'sunfounder-thales-pico-starter-kit',
+    ctaLabel: 'Get the Thales Kit',
     name: 'Raspberry Pi Pico Starter Kit – Thales',
     brand: 'SunFounder',
     category: 'starter-kits',
@@ -164,11 +172,11 @@ export const products: Product[] = [
         { name: 'Jumper wires', description: 'Connect the Pico and components on the breadboard.' },
       ],
       projects: [
-        { title: 'Blink an LED', description: 'Control a simple output while learning polarity, resistance, and GPIO.', difficulty: 'Beginner', estimatedTime: '20–30 minutes', href: '/projects/blink-led' },
-        { title: 'Button-Controlled LED', description: 'Use a push button as a digital input to control an LED.', difficulty: 'Beginner', href: '/projects/push-button-input' },
-        { title: 'Traffic Light', description: 'Sequence three LEDs to model a timed traffic signal.', difficulty: 'Beginner', href: '/projects/traffic-light' },
-        { title: 'Reaction Game', description: 'Combine lights, timing, and player input in an interactive challenge.', difficulty: 'Beginner' },
-        { title: 'Colorful Light', description: 'Mix RGB color channels and explore controllable visual output.', difficulty: 'Beginner' },
+        { projectId: 'blink-led', title: 'Blink an LED', description: 'Control a simple output while learning polarity, resistance, and GPIO.', difficulty: 'Beginner', estimatedTime: '20–30 minutes' },
+        { projectId: 'push-button-input', title: 'Read a Push Button', description: 'Use a push button as a digital input to control an LED.', difficulty: 'Beginner' },
+        { projectId: 'traffic-light', title: 'Traffic Light', description: 'Sequence three LEDs to model a timed traffic signal.', difficulty: 'Beginner' },
+        { projectId: 'reaction-game', title: 'Reaction Game', description: 'Combine lights, timing, and player input in an interactive challenge.', difficulty: 'Beginner' },
+        { projectId: 'colorful-light', title: 'Colorful Light', description: 'Mix RGB color channels and explore controllable visual output.', difficulty: 'Beginner' },
       ],
       sellingPoints: ['Designed for complete beginners', 'No soldering required for introductory breadboard projects', 'One kit supports multiple experiments', 'Introduces both programming and electronics', 'Projects progress from simple outputs to interactive systems', 'Official SunFounder documentation is available for supported projects'],
       documentationUrl: 'https://docs.sunfounder.com/projects/thales-kit/en/latest/',
@@ -181,13 +189,14 @@ export const products: Product[] = [
       explanation: 'Suitable for complete beginners who want to learn Pico basics without purchasing the largest kit.',
       selectedComponents: ['Raspberry Pi Pico', 'Breadboard', 'LEDs', 'Resistors', 'Push buttons', 'Sound components', 'Basic sensors', 'Jumper wires'],
       learningAreas: ['Blink an LED', 'Read a push button', 'Control RGB LEDs', 'Build a reaction game', 'Learn basic MicroPython'],
-      projectExamples: ['Blink an LED', 'Push-button input', 'RGB light control', 'Reaction game'],
+      projectIds: ['blink-led', 'push-button-input', 'colorful-light', 'reaction-game'],
       officialProductUrl: 'https://www.sunfounder.com/products/pico-starter-kit',
       officialDocumentationUrl: 'https://docs.sunfounder.com/projects/thales-kit/en/latest/',
     },
   },
   {
     id: 'sunfounder-euler-pico-ultimate-kit',
+    ctaLabel: 'Get the Euler Kit',
     name: 'Raspberry Pi Pico Ultimate Starter Kit – Euler',
     brand: 'SunFounder',
     category: 'starter-kits',
@@ -217,13 +226,14 @@ export const products: Product[] = [
       explanation: 'Appropriate for learners who want a broader component collection and significantly more projects without requiring wireless connectivity.',
       selectedComponents: ['Raspberry Pi Pico', 'Displays', 'Sound components', 'Motor drivers', 'Controllers', 'Sensors'],
       learningAreas: ['Displays', 'Motors and drivers', 'Sound', 'Sensors', 'Controllers', 'Larger multi-component projects'],
-      projectExamples: ['Plant monitor', 'Display experiments', 'Motor-control projects', 'Multi-sensor systems'],
+      projectIds: ['plant-monitor', 'display-experiments', 'motor-control-projects', 'multi-sensor-systems'],
       officialProductUrl: 'https://www.sunfounder.com/products/sunfounder-euler-kit',
       officialDocumentationUrl: 'https://docs.sunfounder.com/projects/euler-kit/en/latest/',
     },
   },
   {
     id: 'sunfounder-kepler-pico-w-ultimate-kit',
+    ctaLabel: 'Get the Kepler Kit',
     name: 'Raspberry Pi Pico W Ultimate Starter Kit – Kepler',
     brand: 'SunFounder', category: 'starter-kits', level: 'Beginner', platform: 'Raspberry Pi Pico W', collection: 'raspberry-pi-pico', featured: false,
     shortDescription: 'A Pico W learning kit for connected electronics, programming, sensors, and interactive hardware experiments.',
@@ -241,7 +251,7 @@ export const products: Product[] = [
       explanation: 'Uses the Raspberry Pi Pico W and suits visitors interested in wireless control, web-connected projects, and IoT.',
       selectedComponents: ['Raspberry Pi Pico W', 'Sensors', 'Displays', 'Motors', 'Pumps', 'Wireless project hardware'],
       learningAreas: ['Wi-Fi', 'IoT', 'Wireless control', 'Sensors', 'Displays', 'Motors and pumps'],
-      projectExamples: ['Digital bubble level', 'Wireless control experiments', 'IoT sensor monitoring', 'Automated motor and pump projects'],
+      projectIds: ['digital-bubble-level', 'wireless-control-experiments', 'iot-sensor-monitoring', 'automated-motor-pump-projects'],
       officialProductUrl: 'https://www.sunfounder.com/products/sunfounder-raspberry-pi-pico-w-ultimate-starter-kit',
       officialDocumentationUrl: 'https://docs.sunfounder.com/projects/kepler-kit/en/latest/',
     },

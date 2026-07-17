@@ -8,7 +8,6 @@ difficulty: Beginner
 estimatedTime: 30–45 minutes
 estimatedCost: $15–$25
 platform: Arduino
-recommendedProductId: sunfounder-raspberry-pi-pico-ultimate-starter-kit
 featuredImage:
   alt: Illustration representing a completed LED night light project
   width: 1200

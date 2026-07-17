@@ -2,7 +2,7 @@
 import BuyButtons from './BuyButtons.astro';
 import Badge from './design-system/Badge.astro';
 import Icon from './design-system/Icon.astro';
-import type { Product } from '../data/products';
+import { getProductCtaLabel, type Product } from '../data/products';
 
 interface Props {
   product: Product;
@@ -16,7 +16,7 @@ const { product } = Astro.props;
   <div class="relative grid gap-8 lg:grid-cols-[1fr_0.65fr] lg:items-center">
     <div>
       <p class="inline-flex rounded-full bg-orange-500 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-white">Recommended Kit for This Project</p>
-      <h2 id="recommended-kit-title" class="mt-4 text-3xl font-black tracking-tight sm:text-4xl">{product.name}</h2>
+      <h2 id="recommended-kit-title" class="mt-4 text-3xl font-black tracking-tight text-white sm:text-4xl">{product.name}</h2>
       <p class="mt-2 text-sm font-semibold text-blue-300">{product.brand}</p>
       <div class="mt-4 flex flex-wrap gap-2"><Badge>{product.platform}</Badge><Badge>{product.level}</Badge></div>
       <p class="mt-4 max-w-3xl text-base leading-7 text-slate-300">{product.shortDescription}</p>
@@ -33,7 +33,7 @@ const { product } = Astro.props;
 
     <div class="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
       <p class="text-sm font-semibold text-white">Start with the recommended kit</p>
-      <div class="mt-5"><BuyButtons links={product.affiliateLinks} preferredVendor="SunFounder" buttonLabel="Get the Recommended Kit" activeOnly={true} stacked={true} /></div>
+      <div class="mt-5"><BuyButtons links={product.affiliateLinks} preferredVendor="SunFounder" buttonLabel={getProductCtaLabel(product)} activeOnly={true} stacked={true} /></div>
       <p class="mt-4 text-xs leading-5 text-slate-300">Affiliate link: Engineering Maker Lab may earn a commission at no additional cost to you.</p>
     </div>
   </div>

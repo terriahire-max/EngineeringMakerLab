@@ -8,7 +8,6 @@ difficulty: Advanced
 estimatedTime: 90-120 minutes
 estimatedCost: $20-$35
 platform: Raspberry Pi Pico
-recommendedProductId: sunfounder-raspberry-pi-pico-ultimate-starter-kit
 featuredImage:
   alt: Raspberry Pi Pico keypad password lock with micro servo
   width: 1200

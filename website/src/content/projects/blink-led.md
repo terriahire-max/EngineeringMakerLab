@@ -8,9 +8,7 @@ difficulty: Beginner
 estimatedTime: 20–30 minutes
 estimatedCost: Included in the recommended starter kit
 platform: Raspberry Pi Pico
-recommendedProductId: sunfounder-thales-pico-starter-kit
 featuredImage:
-  src: /project-images/blink-led-hero.svg
   alt: Original illustration of a Raspberry Pi Pico connected to a glowing LED on a breadboard
   width: 1200
   height: 900
@@ -32,11 +30,6 @@ parts:
   - { quantity: "2", name: Jumper wires, notes: Male-to-male }
   - { quantity: "1", name: USB cable, notes: Data-capable cable for programming the Pico }
 teacherTip: An LED needs correct polarity, and a resistor limits current to protect both the LED and the Pico GPIO output. The long LED leg is normally the anode, but beginners should verify the component's markings and documentation instead of relying only on leg length.
-officialGuide:
-  title: Complete Official Build Guide
-  href: https://docs.sunfounder.com/projects/thales-kit/en/latest/components/led.html
-  description: Already have the kit? SunFounder's official Thales Kit documentation provides the detailed component information, wiring guidance, and code needed to complete this build.
-  buttonLabel: Open the Official SunFounder LED Guide
 code:
   filename: main.py
   language: python

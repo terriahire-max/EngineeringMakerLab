@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
 import { sortProjectsByLearningPath } from '../../utils/content';
+import { projectResourceById } from '../../data/projectResources';
 
 export const getStaticPaths = (async () => {
   const projects = await getCollection('projects');
@@ -18,9 +19,12 @@ export const getStaticPaths = (async () => {
     const pathIndex = navigationProjects.findIndex((entry) => entry.id === project.id);
     const previousProject = pathIndex > 0 ? navigationProjects[pathIndex - 1] : undefined;
     const nextProject = pathIndex >= 0 ? navigationProjects[pathIndex + 1] : undefined;
-    const kitProjects = projects.filter(
-      (entry) => entry.id !== project.id && entry.data.recommendedProductId === project.data.recommendedProductId,
-    );
+    const productIds = projectResourceById.get(project.id)?.productIds ?? [];
+    const kitProjects = projects.filter((entry) => {
+      if (entry.id === project.id || productIds.length === 0) return false;
+      const relatedProductIds = projectResourceById.get(entry.id)?.productIds ?? [];
+      return productIds.some((productId) => relatedProductIds.includes(productId));
+    });
 
     return {
       params: { slug: project.id },

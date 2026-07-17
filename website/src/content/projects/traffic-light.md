@@ -8,7 +8,6 @@ difficulty: Easy
 estimatedTime: 35-50 minutes
 estimatedCost: $10-$18
 platform: Raspberry Pi Pico
-recommendedProductId: sunfounder-raspberry-pi-pico-ultimate-starter-kit
 featuredImage:
   alt: Three-LED traffic light circuit controlled by a Raspberry Pi Pico
   width: 1200

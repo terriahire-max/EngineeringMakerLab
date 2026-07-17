@@ -8,9 +8,7 @@ difficulty: Beginner
 estimatedTime: 20–30 minutes
 estimatedCost: Included in the recommended starter kit
 platform: Raspberry Pi Pico
-recommendedProductId: sunfounder-raspberry-pi-pico-ultimate-starter-kit
 featuredImage:
-  src: /images/projects/push-button-input/hero.svg
   alt: Original illustration of a Raspberry Pi Pico reading a push button and controlling an illuminated LED
   width: 1200
   height: 900
@@ -32,28 +30,12 @@ parts:
   - { quantity: "1", name: 220 ohm resistor, notes: Limits current through the LED }
   - { quantity: "4", name: Jumper wires, notes: Male-to-male }
   - { quantity: "1", name: USB cable, notes: Data-capable cable for programming }
-visuals:
-  finished:
-    src: /images/projects/push-button-input/finished-project.svg
-    alt: Original illustration of a finished Pico push-button circuit with the button pressed and LED illuminated
-    width: 1200
-    height: 800
-  breadboard:
-    src: /images/projects/push-button-input/breadboard-layout.svg
-    alt: Top-down breadboard layout showing a button between GP14 and ground plus an LED connected to GP15 through a 220 ohm resistor
-    width: 1200
-    height: 800
 circuit:
   title: Pico push-button input and LED output circuit
   description: The push button connects GP14 to GND when pressed; the Pico internal pull-up holds GP14 HIGH when released. GP15 connects through a 220 ohm resistor to the LED anode, and the LED cathode connects to GND.
-  image: /images/projects/push-button-input/circuit-diagram.svg
   alt: Circuit diagram labeling GP14 button input with internal pull-up, GP15 LED output, 220 ohm resistor, LED polarity, and ground
   width: 1200
   height: 800
-officialResources:
-  - { title: Official Tutorial, href: SUNFOUNDER_PUSH_BUTTON_TUTORIAL_URL, description: Complete vendor-specific build and programming walkthrough. }
-  - { title: Official Documentation, href: SUNFOUNDER_PICO_DOCUMENTATION_URL, description: Official reference for the kit and Raspberry Pi Pico platform. }
-  - { title: Official Video, href: SUNFOUNDER_PUSH_BUTTON_VIDEO_URL, description: Vendor-produced video guidance for this project. }
 code:
   filename: main.py
   language: python

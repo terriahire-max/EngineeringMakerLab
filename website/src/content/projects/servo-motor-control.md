@@ -8,7 +8,6 @@ difficulty: Easy
 estimatedTime: 40-60 minutes
 estimatedCost: $12-$22
 platform: Raspberry Pi Pico
-recommendedProductId: sunfounder-raspberry-pi-pico-ultimate-starter-kit
 featuredImage:
   alt: Raspberry Pi Pico controlling a small SG90 hobby servo
   width: 1200
