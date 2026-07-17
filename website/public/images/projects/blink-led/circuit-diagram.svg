@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Raspberry Pi Pico GPIO 15 LED circuit diagram</title>
+  <desc id="desc">A beginner schematic showing GPIO 15 connected through a 220 ohm resistor to the LED anode, then from the LED cathode to ground.</desc>
+  <rect width="1200" height="800" rx="40" fill="#f8fafc"/>
+  <text x="600" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#0f172a">Blink an LED — Circuit Diagram</text>
+  <rect x="70" y="190" width="260" height="410" rx="28" fill="#1d4ed8"/>
+  <text x="200" y="250" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#fff">Raspberry Pi Pico</text>
+  <rect x="105" y="300" width="190" height="58" rx="18" fill="#dbeafe"/>
+  <text x="200" y="337" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1e3a8a">GPIO 15</text>
+  <rect x="105" y="470" width="190" height="58" rx="18" fill="#dbeafe"/>
+  <text x="200" y="507" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#1e3a8a">GND</text>
+  <circle cx="330" cy="329" r="11" fill="#fbbf24"/><circle cx="330" cy="499" r="11" fill="#fbbf24"/>
+  <path d="M341 329h130" fill="none" stroke="#ea580c" stroke-width="12"/>
+  <path d="M471 329l25-36 42 72 42-72 42 72 42-72 25 36" fill="none" stroke="#334155" stroke-width="8" stroke-linejoin="round"/>
+  <rect x="510" y="215" width="145" height="48" rx="18" fill="#ffedd5"/>
+  <text x="582" y="247" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#9a3412">220Ω</text>
+  <path d="M689 329h95" fill="none" stroke="#ea580c" stroke-width="12"/>
+  <path d="M784 258v142l124-71z" fill="#fb923c" stroke="#9a3412" stroke-width="7"/>
+  <path d="M925 258v142" stroke="#334155" stroke-width="9"/>
+  <path d="M908 275l46-34m-29 60l46-34" stroke="#1d4ed8" stroke-width="7"/>
+  <rect x="730" y="430" width="190" height="50" rx="18" fill="#ffedd5"/>
+  <text x="825" y="463" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#9a3412">LED anode (+)</text>
+  <rect x="925" y="430" width="210" height="50" rx="18" fill="#e2e8f0"/>
+  <text x="1030" y="463" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#0f172a">LED cathode (−)</text>
+  <path d="M925 329h145v170H341" fill="none" stroke="#0f172a" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M200 650v48m-45 0h90m-66 24h42m-25 24h8" stroke="#0f172a" stroke-width="8"/>
+  <path d="M330 499H200v151" fill="none" stroke="#0f172a" stroke-width="12"/>
+  <rect x="80" y="665" width="105" height="48" rx="18" fill="#e2e8f0"/>
+  <text x="132" y="697" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#0f172a">GND</text>
+  <text x="600" y="760" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" fill="#334155">GPIO 15 → 220Ω resistor → LED anode → LED cathode → GND</text>
+</svg>

@@ -1,0 +1,88 @@
+---
+import type { Product } from '../data/products';
+import BuyButtons from './BuyButtons.astro';
+import DifficultyBadge from './DifficultyBadge.astro';
+import Icon from './design-system/Icon.astro';
+import Button from './design-system/Button.astro';
+
+interface Props {
+  product: Product;
+  titleLevel?: 'h2' | 'h3';
+  detailPage?: boolean;
+  compact?: boolean;
+  summaryOnly?: boolean;
+}
+
+const { product, titleLevel = 'h2', detailPage = false, compact = false, summaryOnly = false } = Astro.props;
+const profile = product.kitSalesProfile;
+if (!profile) throw new Error(`Kit showcase data is missing for "${product.id}".`);
+const TitleTag = titleLevel;
+const SectionTitleTag = titleLevel === 'h2' ? 'h3' : 'h4';
+const ProjectTitleTag = titleLevel === 'h2' ? 'h3' : 'h4';
+const detailUrl = `/products/${product.id}`;
+const displayedComponents = compact ? profile.components.slice(0, 6) : profile.components;
+const displayedProjects = compact ? profile.projects.slice(0, 4) : profile.projects;
+---
+
+<article class="overflow-hidden rounded-[var(--radius-card)] border border-slate-200 bg-white shadow-[var(--shadow-elevated)]">
+  <div class="grid gap-8 bg-slate-950 p-6 text-white sm:p-8 lg:grid-cols-[1fr_0.7fr] lg:p-10">
+    <div>
+      <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-blue-300">{product.brand} · {product.platform}</p>
+      <TitleTag class="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">{product.name}</TitleTag>
+      <p class="mt-5 max-w-3xl leading-7 text-slate-300">{profile.recommendation}</p>
+      <div class="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5">
+        <p class="text-xs font-bold uppercase tracking-[0.14em] text-blue-300">Who it is for</p>
+        <p class="mt-2 leading-6 text-slate-100">{profile.audienceSummary}</p>
+      </div>
+    </div>
+
+    <div class="self-start rounded-2xl border border-orange-400/30 bg-white/5 p-5 sm:p-6">
+      <p class="text-sm font-bold text-white">Begin with one reusable kit</p>
+      <p class="mt-2 text-sm leading-6 text-slate-300">Use the same core components across several progressively more capable builds.</p>
+      <div class="mt-5"><BuyButtons links={product.affiliateLinks} preferredVendor="SunFounder" buttonLabel="Get the Thales Starter Kit" activeOnly={true} stacked={true} /></div>
+      <div class="mt-3"><Button href={detailUrl} variant="inverse" class="w-full">Explore Projects <Icon name="arrow-right" /></Button></div>
+      <p class="mt-4 text-xs leading-5 text-slate-300">Affiliate link: Engineering Maker Lab may earn a commission at no additional cost to you.</p>
+    </div>
+  </div>
+
+  {!summaryOnly && <div class="space-y-12 p-6 sm:p-8 lg:p-10">
+    <section aria-labelledby={`${product.id}-components`}>
+      <SectionTitleTag id={`${product.id}-components`} class="text-2xl font-black text-slate-900">Main Components</SectionTitleTag>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {displayedComponents.map((component) => (
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+            <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-100 text-blue-700" aria-hidden="true"><Icon name="cpu" size={19} /></span>
+            <p class="mt-3 font-bold text-slate-900">{component.name}</p>
+            <p class="mt-1 text-sm leading-6 text-slate-600">{component.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section aria-labelledby={`${product.id}-projects`}>
+      <SectionTitleTag id={`${product.id}-projects`} class="text-2xl font-black text-slate-900">What You Can Build</SectionTitleTag>
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
+        {displayedProjects.map((project) => (
+          <article class="rounded-2xl border border-slate-200 p-5">
+            <div class="flex flex-wrap items-center gap-3"><DifficultyBadge level={project.difficulty} />{project.estimatedTime && <span class="inline-flex items-center gap-1 text-xs font-semibold text-slate-500"><Icon name="clock" size={15} />{project.estimatedTime}</span>}</div>
+            <ProjectTitleTag class="mt-3 text-lg font-bold text-slate-900">{project.title}</ProjectTitleTag>
+            <p class="mt-2 text-sm leading-6 text-slate-600">{project.description}</p>
+            {project.href ? <a href={project.href} class="text-link mt-4" aria-label={`View the ${project.title} project`}>View project <Icon name="arrow-right" /></a> : <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-slate-500">Included in the kit curriculum</p>}
+          </article>
+        ))}
+      </div>
+      {!detailPage && <div class="mt-6"><Button href={detailUrl} variant="secondary">View All Projects for This Kit <Icon name="arrow-right" /></Button></div>}
+    </section>
+
+    {!compact && <div class="grid gap-8 lg:grid-cols-2">
+      <section aria-labelledby={`${product.id}-stands-out`}>
+        <SectionTitleTag id={`${product.id}-stands-out`} class="text-2xl font-black text-slate-900">Why This Kit Stands Out</SectionTitleTag>
+        <ul class="mt-5 space-y-3">{profile.sellingPoints.map((point) => <li class="flex gap-3 text-sm leading-6 text-slate-700"><span class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-700 text-white"><Icon name="check" size={13} /></span>{point}</li>)}</ul>
+      </section>
+      <section aria-labelledby={`${product.id}-good-for`} class="rounded-2xl bg-blue-50 p-6">
+        <SectionTitleTag id={`${product.id}-good-for`} class="text-2xl font-black text-slate-900">A Good Choice For</SectionTitleTag>
+        <ul class="mt-5 grid gap-3 sm:grid-cols-2">{profile.goodFor.map((audience) => <li class="flex items-start gap-2 text-sm font-semibold leading-6 text-slate-700"><Icon name="users" size={17} class="mt-1 shrink-0 text-blue-700" />{audience}</li>)}</ul>
+      </section>
+    </div>}
+  </div>}
+</article>

@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './design-system/Icon.astro';
+type Resources = NonNullable<CollectionEntry<'projects'>['data']['officialResources']>;
+interface Props { resources: Resources; }
+const { resources } = Astro.props;
+const isExternal = (href: string) => /^https?:\/\//i.test(href);
+---
+<div class="grid gap-4 sm:grid-cols-3">
+  {resources.map((resource) => {
+    const active = isExternal(resource.href);
+    return <article class="surface-card flex flex-col p-5">
+      <p class="text-xs font-bold uppercase tracking-[0.14em] text-blue-700">SunFounder</p>
+      <h3 class="mt-2 text-lg font-bold text-slate-900">{resource.title}</h3>
+      <p class="mt-2 flex-1 text-sm leading-6 text-slate-600">{resource.description}</p>
+      {active ? <a href={resource.href} target="_blank" rel="noopener noreferrer" class="text-link mt-4" aria-label={`${resource.title} (opens in a new tab)`}>Open resource <Icon name="arrow-right" /></a> : <p class="mt-4 text-sm font-semibold text-slate-500">Link awaiting configuration</p>}
+    </article>;
+  })}
+</div>

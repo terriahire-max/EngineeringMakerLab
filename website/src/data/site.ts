@@ -1,9 +1,8 @@
 export const siteNavigation = [
   { label: 'Home', href: '/' },
-  { label: 'Start Here', href: '/start-here' },
+  { label: 'Collections', href: '/collections' },
+  { label: 'Recommended Products', href: '/recommended-kits' },
   { label: 'Projects', href: '/projects' },
-  { label: 'Tutorials', href: '/tutorials' },
-  { label: 'Recommended Kits', href: '/recommended-kits' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];

@@ -1,0 +1,7 @@
+---
+import PicoProductPage from '../../components/PicoProductPage.astro';
+import { productById } from '../../data/products';
+const product = productById.get('sunfounder-kepler-pico-w-ultimate-kit');
+if (!product) throw new Error('The Kepler product entry is missing.');
+---
+<PicoProductPage product={product} pageTitle="SunFounder Kepler Raspberry Pi Pico W Kit | Engineering Maker Lab" pageDescription="Explore who the SunFounder Kepler Pico W kit is for, its 450+ components, 117 projects, wireless learning focus, and official documentation." />

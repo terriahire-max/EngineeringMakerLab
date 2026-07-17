@@ -6,8 +6,10 @@ import Icon from './design-system/Icon.astro';
 interface Props {
   previousProject?: CollectionEntry<'projects'>;
   nextProject?: CollectionEntry<'projects'>;
+  nextPlannedProject?: string;
 }
-const { previousProject, nextProject } = Astro.props;
+const { previousProject, nextProject, nextPlannedProject } = Astro.props;
+const showPlanned = Boolean(nextPlannedProject);
 ---
 
 <section aria-labelledby="project-complete-title" class="relative overflow-hidden rounded-[var(--radius-card)] bg-blue-700 p-7 text-white shadow-[var(--shadow-elevated)] sm:p-9">
@@ -16,10 +18,10 @@ const { previousProject, nextProject } = Astro.props;
     <span class="flex h-11 w-11 items-center justify-center rounded-full bg-white/15"><Icon name="check" size={24} /></span>
     <p class="mt-5 text-xs font-extrabold uppercase tracking-[0.18em] text-blue-200">Project complete</p>
     <h2 id="project-complete-title" class="mt-2 text-3xl font-black text-white">
-      {nextProject ? `Ready for ${nextProject.data.title}?` : 'Choose your next build'}
+      {showPlanned ? `Next planned project: ${nextPlannedProject}` : nextProject ? `Ready for ${nextProject.data.title}?` : 'Choose your next build'}
     </h2>
     <p class="mt-3 max-w-2xl leading-7 text-blue-50">
-      {nextProject ? nextProject.data.description : 'Keep your momentum by choosing another project that reuses the skills and components you already know.'}
+      {showPlanned ? 'This project is planned for the learning path but has not been published yet.' : nextProject ? nextProject.data.description : 'Keep your momentum by choosing another project that reuses the skills and components you already know.'}
     </p>
     <div class="mt-6 flex flex-col gap-3 sm:flex-row">
       {previousProject && (
@@ -27,8 +29,8 @@ const { previousProject, nextProject } = Astro.props;
           <Icon name="arrow-left" /> Previous: {previousProject.data.title}
         </Button>
       )}
-      <Button href={nextProject ? `/projects/${nextProject.id}` : '/projects'} variant="inverse">
-        {nextProject ? 'Continue to next project' : 'Browse all projects'} <Icon name="arrow-right" />
+      <Button href={!showPlanned && nextProject ? `/projects/${nextProject.id}` : '/projects'} variant="inverse">
+        {!showPlanned && nextProject ? 'Continue to next project' : 'Browse published projects'} <Icon name="arrow-right" />
       </Button>
     </div>
   </div>

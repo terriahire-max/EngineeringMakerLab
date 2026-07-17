@@ -1,0 +1,18 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CollectionCard from '../../components/CollectionCard.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { productCollections } from '../../data/collections';
+import type { BreadcrumbItem } from '../../utils/seo';
+
+const breadcrumbs: BreadcrumbItem[] = [{ label: 'Home', href: '/' }, { label: 'Collections' }];
+---
+
+<PageLayout title="Electronics, Robotics and AI Kit Collections | Engineering Maker Lab" description="Explore beginner-friendly Raspberry Pi Pico, Arduino, robotics, and AI kit collections organized by the skills and projects they support." breadcrumbs={breadcrumbs}>
+  <section class="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
+    <Breadcrumbs items={breadcrumbs} />
+    <div class="mt-8"><SectionHeading headingLevel="h1" eyebrow="Choose an interest" title="Explore Collections" description="Start with the kind of project you want to build, then compare recommended products and the skills each collection develops." /></div>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">{productCollections.map((collection) => <CollectionCard collection={collection} headingLevel="h2" />)}</div>
+  </section>
+</PageLayout>

@@ -103,7 +103,7 @@ relatedProjects:
   - title: Blink an LED
     description: Start with a simple controlled LED output.
     difficulty: Beginner
-    href: /projects/blink-an-led
+    href: /projects/blink-led
   - title: Traffic Light
     description: Sequence several LEDs with timed outputs.
     difficulty: Beginner

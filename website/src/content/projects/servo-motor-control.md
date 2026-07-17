@@ -67,7 +67,7 @@ relatedTutorials:
 relatedBuyingGuide: { title: Best Raspberry Pi Pico Starter Kit, href: /buying-guides/best-raspberry-pi-pico-starter-kit }
 relatedProjects:
   - { title: Password Lock, description: Use a servo as a lock actuator., difficulty: Intermediate, href: /projects/password-lock }
-  - { title: Blink an LED, description: Review basic GPIO output control., difficulty: Beginner, href: /projects/blink-an-led }
+  - { title: Blink an LED, description: Review basic GPIO output control., difficulty: Beginner, href: /projects/blink-led }
   - { title: Ultrasonic Distance Sensor, description: Add distance sensing to a moving build., difficulty: Intermediate, href: /projects/ultrasonic-distance-sensor }
 ---
 

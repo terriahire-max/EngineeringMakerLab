@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Finished Raspberry Pi Pico blinking LED project illustration</title>
+  <desc id="desc">A polished original illustration of a Raspberry Pi Pico, breadboard, resistor, jumper wires, and one illuminated orange LED.</desc>
+  <defs><filter id="shadow"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#1e3a8a" flood-opacity=".14"/></filter><radialGradient id="glow"><stop stop-color="#fdba74" stop-opacity=".7"/><stop offset="1" stop-color="#fdba74" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1200" height="800" rx="40" fill="#eff6ff"/>
+  <circle cx="1030" cy="120" r="220" fill="#ffedd5"/>
+  <text x="600" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#0f172a">Finished Project</text>
+  <g filter="url(#shadow)"><rect x="85" y="125" width="1030" height="570" rx="42" fill="#fff" stroke="#bfdbfe" stroke-width="7"/></g>
+  <rect x="150" y="190" width="900" height="430" rx="30" fill="#f8fafc" stroke="#cbd5e1" stroke-width="5"/>
+  <path d="M185 265h830M185 545h830" stroke="#dbeafe" stroke-width="10"/>
+  <rect x="275" y="175" width="260" height="460" rx="28" fill="#1d4ed8"/>
+  <rect x="340" y="215" width="130" height="95" rx="12" fill="#0f172a"/>
+  <g fill="#fbbf24"><circle cx="300" cy="250" r="7"/><circle cx="300" cy="295" r="7"/><circle cx="300" cy="340" r="7"/><circle cx="510" cy="250" r="7"/><circle cx="510" cy="295" r="7"/><circle cx="510" cy="340" r="7"/></g>
+  <text x="405" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="700" fill="#fff">PICO</text>
+  <path d="M510 340h165" stroke="#ea580c" stroke-width="13" fill="none"/>
+  <rect x="675" y="319" width="185" height="42" rx="19" fill="#e2e8f0" stroke="#475569" stroke-width="4"/>
+  <path d="M710 319v42m30-42v42m80-42v42" stroke="#92400e" stroke-width="9"/>
+  <path d="M860 340h90v-45" stroke="#ea580c" stroke-width="13" fill="none"/>
+  <circle cx="950" cy="220" r="120" fill="url(#glow)"/>
+  <path d="M920 295v-95a30 30 0 0160 0v95" fill="#fb923c" stroke="#9a3412" stroke-width="7"/>
+  <path d="M980 295v190H510" stroke="#0f172a" stroke-width="13" fill="none" stroke-linejoin="round"/>
+  <rect x="720" y="535" width="260" height="50" rx="20" fill="#ffedd5"/>
+  <text x="850" y="568" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#9a3412">LED blinking on GPIO 15</text>
+  <text x="600" y="755" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" fill="#334155">Illustrative preview — not a product photograph</text>
+</svg>

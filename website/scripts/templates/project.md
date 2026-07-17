@@ -26,6 +26,12 @@ parts:
   - { quantity: "1", name: "Raspberry Pi Pico", notes: "With header pins installed" }
   - { quantity: "1", name: "Solderless breadboard", notes: "Half-size or larger" }
   - { quantity: "1", name: "Data-capable USB cable", notes: "For power and programming" }
+teacherTip: "Explain a safety principle, design decision, measurement, or debugging habit that transfers to later projects."
+officialGuide:
+  title: "Complete Official Build Guide"
+  href: "https://example.com/replace-with-official-resource"
+  description: "Already have the kit? Use the official documentation for detailed component information, wiring guidance, and code."
+  buttonLabel: "Open the Official Guide"
 circuit:
   title: {{CIRCUIT_TITLE_JSON}}
   description: "Describe every signal, power, ground, and protective connection in one concise paragraph."

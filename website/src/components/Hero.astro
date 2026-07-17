@@ -7,31 +7,31 @@ import Button from './design-system/Button.astro';
   <div>
     <div class="mb-4"><Badge>For students, families, and adult beginners</Badge></div>
     <h1 class="heading-display max-w-2xl">
-      Learn Electronics by Building
+      Choose What You Want to Build
     </h1>
     <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-      Engineering Maker Lab is a guided place to learn electronics through practical projects.
-      Build circuits, understand how they work, and choose reusable gear with confidence.
+      Explore beginner-friendly electronics, robotics, AI, and programming kits selected for the projects and skills they make possible.
     </p>
 
     <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-      <Button href="/start-here" class="w-full sm:w-auto">Start Here</Button>
-      <Button href="/projects" variant="secondary" class="w-full sm:w-auto">Browse Projects</Button>
+      <Button href="#explore-by-interest" class="w-full sm:w-auto">Explore Collections</Button>
+      <Button href="#featured-product" variant="secondary" class="w-full sm:w-auto">See Recommended Products</Button>
     </div>
   </div>
 
   <div class="rounded-[var(--radius-card)] bg-gradient-to-br from-blue-700 to-sky-500 p-[1px] shadow-[var(--shadow-elevated)]">
     <div class="rounded-[calc(1.5rem-1px)] bg-white p-6 sm:p-8">
       <div class="grid gap-4 sm:grid-cols-2">
-        <div class="rounded-2xl bg-slate-50 p-5">
+        <a href="#explore-by-interest" aria-label="Explore kit categories" class="rounded-2xl bg-slate-50 p-5 transition hover:bg-blue-50">
           <p class="text-sm font-semibold text-slate-500">Get equipped</p>
           <p class="mt-2 text-2xl font-bold text-slate-900">1. Choose one kit</p>
           <p class="mt-2 text-sm text-slate-600">Use one reusable set of parts across the learning path.</p>
-        </div>
+          <span class="mt-3 inline-block text-sm font-bold text-blue-700">Explore kit categories</span>
+        </a>
         <div class="rounded-2xl bg-slate-50 p-5">
           <p class="text-sm font-semibold text-slate-500">Build progressively</p>
-          <p class="mt-2 text-2xl font-bold text-slate-900">2. Finish five projects</p>
-          <p class="mt-2 text-sm text-slate-600">Move from a single LED to sensors, motion, and inputs.</p>
+          <p class="mt-2 text-2xl font-bold text-slate-900">2. Build several projects</p>
+          <p class="mt-2 text-sm text-slate-600">Move from a single LED to sensors, sound, and interactive inputs.</p>
         </div>
         <div class="rounded-2xl bg-slate-50 p-5 sm:col-span-2">
           <p class="text-sm font-semibold text-slate-500">Keep learning</p>

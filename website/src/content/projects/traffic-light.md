@@ -15,7 +15,7 @@ featuredImage:
   height: 900
 tags: [Raspberry Pi Pico, LEDs, GPIO, Sequencing]
 featured: true
-learningPathOrder: 2
+learningPathOrder: 3
 learningGoals:
   - Control several GPIO outputs independently
   - Organize repeated behavior in a function
@@ -66,7 +66,7 @@ relatedTutorials:
   - { title: Breadboard Basics, href: /tutorials/breadboard-basics }
 relatedBuyingGuide: { title: Best Raspberry Pi Pico Starter Kit, href: /buying-guides/best-raspberry-pi-pico-starter-kit }
 relatedProjects:
-  - { title: Blink an LED, description: Start with one GPIO output., difficulty: Beginner, href: /projects/blink-an-led }
+  - { title: Blink an LED, description: Start with one GPIO output., difficulty: Beginner, href: /projects/blink-led }
   - { title: Password Lock, description: Combine multiple inputs and outputs., difficulty: Intermediate, href: /projects/password-lock }
   - { title: LED Night Light, description: Let a sensor control an LED., difficulty: Beginner, href: /projects/led-night-light }
 ---

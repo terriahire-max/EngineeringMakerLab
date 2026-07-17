@@ -1,0 +1,7 @@
+---
+import PicoProductPage from '../../components/PicoProductPage.astro';
+import { productById } from '../../data/products';
+const product = productById.get('sunfounder-euler-pico-ultimate-kit');
+if (!product) throw new Error('The Euler product entry is missing.');
+---
+<PicoProductPage product={product} pageTitle="SunFounder Euler Raspberry Pi Pico Kit | Engineering Maker Lab" pageDescription="Explore who the SunFounder Euler Pico kit is for, its 320+ components, 113 projects, learning areas, and official documentation." />

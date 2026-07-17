@@ -1,21 +1,22 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import PageLayout from './PageLayout.astro';
+import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 import CircuitDiagramPlaceholder from '../components/CircuitDiagramPlaceholder.astro';
 import CodeExample from '../components/CodeExample.astro';
 import FAQ from '../components/FAQ.astro';
 import PartsList from '../components/PartsList.astro';
 import ProjectHero from '../components/ProjectHero.astro';
 import ProjectSection from '../components/ProjectSection.astro';
+import ProjectVisual from '../components/ProjectVisual.astro';
 import RecommendedKit from '../components/RecommendedKit.astro';
 import RelatedProjects from '../components/RelatedProjects.astro';
 import Troubleshooting from '../components/Troubleshooting.astro';
-import Icon from '../components/design-system/Icon.astro';
-import { productById } from '../data/products';
-import MoreProjectsWithKit from '../components/MoreProjectsWithKit.astro';
+import OfficialResources from '../components/OfficialResources.astro';
 import ProjectCompletionCTA from '../components/ProjectCompletionCTA.astro';
-import RecommendedFor from '../components/RecommendedFor.astro';
-import ProjectResourceLinks from '../components/ProjectResourceLinks.astro';
+import Icon from '../components/design-system/Icon.astro';
+import Button from '../components/design-system/Button.astro';
+import { productById } from '../data/products';
 import { buildArticleSchema, buildProductSchema, type BreadcrumbItem } from '../utils/seo';
 
 interface Props {
@@ -25,174 +26,56 @@ interface Props {
   nextProject?: CollectionEntry<'projects'>;
 }
 
-const { project, kitProjects, previousProject, nextProject } = Astro.props;
+const { project, previousProject, nextProject } = Astro.props;
 const { data } = project;
 const pageTitle = `${data.title} Project | Engineering Maker Lab`;
 const recommendedProduct = productById.get(data.recommendedProductId);
 const projectPath = `/projects/${project.id}`;
-const breadcrumbs: BreadcrumbItem[] = [
-  { label: 'Home', href: '/' },
-  { label: 'Projects', href: '/projects' },
-  { label: data.title },
-];
-
-if (!recommendedProduct) {
-  throw new Error(`Project "${project.id}" references unknown product "${data.recommendedProductId}".`);
-}
-
-const articleSchema = buildArticleSchema({
-  title: data.title,
-  description: data.description,
-  path: projectPath,
-  image: data.featuredImage.src,
-  publishedDate: data.publishedDate,
-  updatedDate: data.updatedDate,
-  section: 'Electronics Projects',
-  tags: data.tags,
-});
+const breadcrumbs: BreadcrumbItem[] = [{ label: 'Home', href: '/' }, { label: 'Projects', href: '/projects' }, { label: data.title }];
+if (!recommendedProduct) throw new Error(`Project "${project.id}" references unknown product "${data.recommendedProductId}".`);
+const articleSchema = buildArticleSchema({ title: data.title, description: data.description, path: projectPath, image: data.featuredImage.src, publishedDate: data.publishedDate, updatedDate: data.updatedDate, section: 'Electronics Projects', tags: data.tags });
+const socialImage = data.featuredImage.src ? { src: data.featuredImage.src, alt: data.featuredImage.alt, width: data.featuredImage.width, height: data.featuredImage.height } : undefined;
 ---
 
-<PageLayout
-  title={pageTitle}
-  description={data.description}
-  contentType="article"
-  image={data.featuredImage.src ? { src: data.featuredImage.src, alt: data.featuredImage.alt, width: data.featuredImage.width, height: data.featuredImage.height } : undefined}
-  publishedDate={data.publishedDate}
-  updatedDate={data.updatedDate}
-  breadcrumbs={breadcrumbs}
-  structuredData={[articleSchema, buildProductSchema(recommendedProduct)]}
->
+<PageLayout title={pageTitle} description={data.description} contentType="article" image={socialImage} publishedDate={data.publishedDate} updatedDate={data.updatedDate} breadcrumbs={breadcrumbs} structuredData={[articleSchema, buildProductSchema(recommendedProduct)]}>
   <article>
     <ProjectHero project={data} breadcrumbs={breadcrumbs} />
 
-    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-      <RecommendedKit product={recommendedProduct} />
-      <div class="mt-8"><RecommendedFor audiences={data.recommendedFor} /></div>
-    </div>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8"><RecommendedKit product={recommendedProduct} /></div>
 
-    <div class="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[minmax(0,1fr)_15rem] lg:px-8">
-      <div class="space-y-12">
-        <ProjectSection id="learn" eyebrow="Skills" title="What You'll Learn">
-          <ul class="grid gap-4 sm:grid-cols-2">
-            {data.learningGoals.map((goal) => (
-              <li class="flex gap-3 rounded-2xl border border-blue-100 bg-blue-50/60 p-4 text-sm font-medium leading-6 text-slate-800">
-                <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-700 text-white"><Icon name="check" size={14} /></span>
-                {goal}
-              </li>
-            ))}
-          </ul>
-        </ProjectSection>
+    <div class="mx-auto max-w-4xl space-y-12 px-4 py-14 sm:px-6 lg:px-8">
+      <ProjectSection id="build" eyebrow="Project overview" title="What You Will Build">
+        <div class="article-content"><slot /></div>
+      </ProjectSection>
 
-        <ProjectSection id="parts" eyebrow="Preparation" title="Required Parts" description="Gather these components before starting the build.">
-          <PartsList parts={data.parts} />
-        </ProjectSection>
+      {data.visuals?.finished && <ProjectSection id="finished" eyebrow="The result" title="Finished Project"><ProjectVisual {...data.visuals.finished} caption="Finished project reference" /></ProjectSection>}
 
-        <ProjectSection id="circuit" eyebrow="Wiring" title="Circuit Diagram" description={data.circuit.description}>
-          <CircuitDiagramPlaceholder circuit={data.circuit} />
-        </ProjectSection>
+      <ProjectSection id="learn" eyebrow="Skills" title="What You Will Learn">
+        <ul class="grid gap-4 sm:grid-cols-2">{data.learningGoals.map((goal) => <li class="flex gap-3 rounded-2xl border border-blue-100 bg-blue-50/60 p-4 text-sm font-medium leading-6 text-slate-800"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-700 text-white"><Icon name="check" size={14} /></span>{goal}</li>)}</ul>
+      </ProjectSection>
 
-        <ProjectSection id="instructions" eyebrow="Build" title="Step-by-Step Instructions" description="Work through each stage in order and disconnect power before changing the wiring.">
-          <div class="project-instructions">
-            <slot />
-          </div>
-        </ProjectSection>
+      <ProjectSection id="parts" eyebrow="Preparation" title="Parts Used" description="Gather these components before starting the build."><PartsList parts={data.parts} /></ProjectSection>
 
-        <ProjectSection id="code" eyebrow="Programming" title="Project Code" description={`Upload ${data.code.filename} after completing the circuit.`}>
-          <CodeExample example={data.code} />
-        </ProjectSection>
+      {data.teacherTip && <ProjectSection id="teacher-tip" eyebrow="Engineering insight" title="Engineering Teacher Tip"><div class="rounded-2xl border border-orange-200 bg-orange-50 p-6 leading-7 text-slate-800">{data.teacherTip}</div></ProjectSection>}
 
-        <ProjectSection id="troubleshooting" eyebrow="Problem solving" title="Troubleshooting">
-          <Troubleshooting items={data.troubleshooting} />
-        </ProjectSection>
+      {data.officialGuide && <ProjectSection id="official-guide" eyebrow="For kit owners" title={data.officialGuide.title} description={data.officialGuide.description}><Button href={data.officialGuide.href} target="_blank" rel="noopener noreferrer" variant="secondary" ariaLabel={`${data.officialGuide.buttonLabel} (opens in a new tab)`}>{data.officialGuide.buttonLabel}</Button></ProjectSection>}
 
-        <ProjectSection id="faq" eyebrow="Common questions" title="FAQ">
-          <FAQ items={data.faq} />
-        </ProjectSection>
+      {!data.officialGuide && data.officialResources && <ProjectSection id="official-resources" eyebrow="Vendor guidance" title="Official Resources" description="These vendor resources provide the complete kit-specific walkthrough."><OfficialResources resources={data.officialResources} /></ProjectSection>}
 
-        <ProjectSection id="resources" eyebrow="Go deeper" title="Related Tutorials and Resources">
-          <ProjectResourceLinks tutorials={data.relatedTutorials} buyingGuide={data.relatedBuyingGuide} />
-        </ProjectSection>
+      {data.visuals?.breadboard && <ProjectSection id="breadboard" eyebrow="Wiring" title="Breadboard Wiring"><ProjectVisual {...data.visuals.breadboard} caption="Simplified original breadboard wiring layout" /></ProjectSection>}
 
-        <ProjectSection id="related" eyebrow="Keep building" title="Related Projects">
-          <RelatedProjects projects={data.relatedProjects} />
-        </ProjectSection>
-      </div>
+      {data.circuit && <ProjectSection id="circuit" eyebrow="Wiring" title="Circuit Diagram" description={data.circuit.description}><CircuitDiagramPlaceholder circuit={data.circuit} /></ProjectSection>}
 
-      <aside class="hidden lg:block">
-        <nav aria-label="On this page" class="sticky top-28 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          <p class="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">On this page</p>
-          <ul class="mt-4 space-y-3 text-sm font-medium text-slate-600">
-            <li><a href="#learn" class="hover:text-blue-700">What You'll Learn</a></li>
-            <li><a href="#parts" class="hover:text-blue-700">Required Parts</a></li>
-            <li><a href="#circuit" class="hover:text-blue-700">Circuit Diagram</a></li>
-            <li><a href="#instructions" class="hover:text-blue-700">Instructions</a></li>
-            <li><a href="#code" class="hover:text-blue-700">Code</a></li>
-            <li><a href="#troubleshooting" class="hover:text-blue-700">Troubleshooting</a></li>
-            <li><a href="#faq" class="hover:text-blue-700">FAQ</a></li>
-            <li><a href="#resources" class="hover:text-blue-700">Learning Resources</a></li>
-            <li><a href="#related" class="hover:text-blue-700">Related Projects</a></li>
-          </ul>
-        </nav>
-      </aside>
-    </div>
+      <ProjectSection id="code" eyebrow="Programming concept" title="MicroPython Concept Summary" description={`This short, independently written example shows the GPIO output and timing pattern used to blink an LED. Compare pin choices and wiring with the official guide before running ${data.code.filename}.`}><CodeExample example={data.code} /></ProjectSection>
 
-    <div class="mx-auto max-w-6xl space-y-12 px-4 pb-16 sm:px-6 lg:px-8">
-      <ProjectCompletionCTA previousProject={previousProject} nextProject={nextProject} />
-      <MoreProjectsWithKit projects={kitProjects} kitName={recommendedProduct.name} />
+      {data.codeExplanation && <ProjectSection id="code-explanation" eyebrow="Understand it" title="How the Code Works"><ol class="space-y-3 text-slate-700">{data.codeExplanation.map((item) => <li class="rounded-xl border border-slate-200 bg-white p-4 leading-7">{item}</li>)}</ol></ProjectSection>}
+
+      <ProjectSection id="troubleshooting" eyebrow="Problem solving" title="Common Beginner Mistakes"><Troubleshooting items={data.troubleshooting} /></ProjectSection>
+      <ProjectSection id="faq" eyebrow="Common questions" title="Frequently Asked Questions"><FAQ items={data.faq} /></ProjectSection>
+      {data.relatedProjects.length > 0 && <ProjectSection id="related" eyebrow="Keep building" title="Related Projects"><RelatedProjects projects={data.relatedProjects} /></ProjectSection>}
+
+      <ProjectCompletionCTA previousProject={previousProject} nextProject={nextProject} nextPlannedProject={data.nextPlannedProject} />
+      <AffiliateDisclosure />
     </div>
   </article>
 </PageLayout>
-
-<style>
-  .project-instructions :global(h2) {
-    margin-top: 1.25rem;
-    border-radius: 1.5rem 1.5rem 0 0;
-    border: 1px solid rgb(226 232 240);
-    border-bottom: 0;
-    background: white;
-    padding: 1.5rem 1.5rem 0.5rem;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: rgb(15 23 42);
-  }
-
-  .project-instructions :global(h2:first-child) {
-    margin-top: 0;
-  }
-
-  .project-instructions :global(p) {
-    border-right: 1px solid rgb(226 232 240);
-    border-left: 1px solid rgb(226 232 240);
-    background: white;
-    padding: 0.5rem 1.5rem 1.5rem;
-    line-height: 1.75;
-    color: rgb(71 85 105);
-  }
-
-  .project-instructions :global(h2 + p:not(:has(+ blockquote))) {
-    border-bottom: 1px solid rgb(226 232 240);
-    border-radius: 0 0 1.5rem 1.5rem;
-  }
-
-  .project-instructions :global(blockquote) {
-    margin: 0;
-    border: 1px solid rgb(254 215 170);
-    border-radius: 0 0 1.5rem 1.5rem;
-    background: rgb(255 247 237);
-  }
-
-  .project-instructions :global(blockquote p) {
-    border: 0;
-    background: transparent;
-    padding: 0.9rem 1.25rem;
-    color: rgb(67 20 7);
-  }
-
-  .project-instructions :global(code) {
-    border-radius: 0.25rem;
-    background: rgb(241 245 249);
-    padding: 0.1rem 0.3rem;
-    font-size: 0.9em;
-    color: rgb(30 64 175);
-  }
-</style>

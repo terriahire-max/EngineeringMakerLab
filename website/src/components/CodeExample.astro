@@ -16,7 +16,7 @@ const { example } = Astro.props;
     <span class="font-mono text-xs text-slate-300">{example.filename}</span>
     <span class="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">{example.language}</span>
   </div>
-  <div class="overflow-x-auto p-5 text-sm [&_pre]:!bg-transparent [&_pre]:leading-6">
+  <div class="max-w-full overflow-x-auto p-5 text-sm [&_pre]:!bg-transparent [&_pre]:leading-6" tabindex="0" aria-label={`Scrollable code example for ${example.filename}`}>
     <Code code={example.content} lang={example.language} theme="github-dark" />
   </div>
 </div>

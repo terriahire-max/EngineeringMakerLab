@@ -33,23 +33,25 @@ const { project, breadcrumbs } = Astro.props;
       </div>
     </div>
 
-    {project.featuredImage.src ? (
-      <img
-        src={project.featuredImage.src}
-        alt={project.featuredImage.alt}
-        class="min-h-80 w-full rounded-3xl border border-slate-200 object-cover shadow-lg lg:min-h-[28rem]"
-        width={project.featuredImage.width}
-        height={project.featuredImage.height}
-        fetchpriority="high"
-        decoding="async"
-      />
-    ) : (
-      <ProjectMediaPlaceholder
-        label="Project illustration"
-        description="A visual reference for this build. Use the parts, wiring, and instruction sections below for exact assembly details."
-        ariaLabel={project.featuredImage.alt}
-        variant="hero"
-      />
-    )}
+    <div class="hidden lg:block">
+      {project.featuredImage.src ? (
+        <img
+          src={project.featuredImage.src}
+          alt={project.featuredImage.alt}
+          class="min-h-[28rem] w-full rounded-3xl border border-slate-200 object-cover shadow-lg"
+          width={project.featuredImage.width}
+          height={project.featuredImage.height}
+          fetchpriority="high"
+          decoding="async"
+        />
+      ) : (
+        <ProjectMediaPlaceholder
+          label="Project illustration"
+          description="A visual reference for this build. Use the parts, wiring, and instruction sections below for exact assembly details."
+          ariaLabel={project.featuredImage.alt}
+          variant="hero"
+        />
+      )}
+    </div>
   </div>
 </header>

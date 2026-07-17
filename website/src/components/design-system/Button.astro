@@ -5,10 +5,13 @@ interface Props {
   href: string;
   variant?: Variant;
   rel?: string;
+  target?: string;
+  ariaLabel?: string;
+  ariaDisabled?: boolean;
   class?: string;
 }
 
-const { href, variant = 'primary', rel, class: className } = Astro.props;
+const { href, variant = 'primary', rel, target, ariaLabel, ariaDisabled, class: className } = Astro.props;
 ---
 
-<a href={href} rel={rel} class:list={['button', `button--${variant}`, className]}><slot /></a>
+<a href={href} rel={rel} target={target} aria-label={ariaLabel} aria-disabled={ariaDisabled ? 'true' : undefined} class:list={['button', `button--${variant}`, ariaDisabled && 'cursor-not-allowed opacity-75', className]}><slot /></a>
