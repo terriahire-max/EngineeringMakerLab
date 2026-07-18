@@ -160,8 +160,6 @@ All notable changes to Engineering Maker Lab are documented here.
 - Reusable Markdown buying-guide system with Raspberry Pi Pico kit, beginner electronics kit, and essential electronics tools guides.
 - Start Here page connecting one recommended kit to five ordered projects and follow-on tutorials.
 - Start Here navigation item.
-- ELEGOO UNO R3 Super Starter Kit and iFixit Essential Electronics Toolkit catalog samples with placeholder affiliate links.
-
 ### Changed
 
 - Homepage project, product, and tutorial cards now use real collection and catalog content.

@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "audit:build": "node scripts/audit-build.mjs",
+    "audit:products": "node scripts/audit-products.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "content:new": "node scripts/new-content.mjs",

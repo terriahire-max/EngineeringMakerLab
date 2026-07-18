@@ -7,13 +7,13 @@ import AffiliateDisclosure from '../../components/AffiliateDisclosure.astro';
 import Icon from '../../components/design-system/Icon.astro';
 import PicoCollectionPage from '../../components/PicoCollectionPage.astro';
 import { productCollections, type ProductCollection } from '../../data/collections';
-import { productById } from '../../data/products';
+import { getProductsByCollection } from '../../data/products';
 import type { BreadcrumbItem } from '../../utils/seo';
 
 export const getStaticPaths = (() => productCollections.map((collection) => ({ params: { slug: collection.id }, props: { collection } }))) satisfies GetStaticPaths;
 interface Props { collection: ProductCollection; }
 const { collection } = Astro.props;
-const recommendedProducts = collection.recommendedProductIds.map((id) => productById.get(id)).filter((product) => product !== undefined);
+const recommendedProducts = getProductsByCollection(collection.id);
 const breadcrumbs: BreadcrumbItem[] = [{ label: 'Home', href: '/' }, { label: 'Collections', href: '/collections' }, { label: collection.name }];
 ---
 

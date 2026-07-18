@@ -7,13 +7,15 @@ import BuyButtons from './BuyButtons.astro';
 import Button from './design-system/Button.astro';
 import Icon from './design-system/Icon.astro';
 import type { BreadcrumbItem } from '../utils/seo';
+import ProductRecommendationCard from './ProductRecommendationCard.astro';
 
 interface Props { products: Product[]; breadcrumbs: BreadcrumbItem[]; }
 const { products, breadcrumbs } = Astro.props;
-const kits = products.map((product) => {
-  if (!product.picoKitProfile) throw new Error(`Pico comparison data is missing for "${product.id}".`);
+type PicoProduct = Product & { picoKitProfile: NonNullable<Product['picoKitProfile']> };
+const kits = products.filter((product): product is PicoProduct => Boolean(product.picoKitProfile)).map((product) => {
   return { product, profile: product.picoKitProfile, active: isActiveAffiliateLink(product.affiliateLinks.sunfounder) };
 });
+const additionalProducts = products.filter((product) => !product.picoKitProfile);
 if (import.meta.env.DEV) kits.filter((kit) => !kit.active).forEach((kit) => console.warn(`[affiliate-config] ${kit.product.id} requires a verified SunFounder affiliate URL.`));
 ---
 
@@ -58,6 +60,12 @@ if (import.meta.env.DEV) kits.filter((kit) => !kit.active).forEach((kit) => cons
       {active && <p class="mt-4 text-xs leading-5 text-slate-500">Affiliate link: Engineering Maker Lab may earn a commission at no additional cost to you.</p>}
     </section>
   ))}</div>
+
+  {additionalProducts.length > 0 && <section aria-labelledby="additional-pico-products" class="mt-14">
+    <p class="eyebrow">More compatible products</p>
+    <h2 id="additional-pico-products" class="heading-section mt-3">Additional Pico-Compatible Products</h2>
+    <div class="mt-7 grid gap-6 lg:grid-cols-3">{additionalProducts.map((product) => <ProductRecommendationCard product={product} />)}</div>
+  </section>}
 
   <section aria-labelledby="choose-kit" class="mt-14 rounded-[var(--radius-card)] bg-slate-950 p-7 text-white sm:p-9">
     <h2 id="choose-kit" class="text-3xl font-black text-white">Which Pico Kit Should You Choose?</h2>

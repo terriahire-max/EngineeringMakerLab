@@ -12,9 +12,9 @@ interface Props { guide: CollectionEntry<'buyingGuides'>; }
 const { guide } = Astro.props;
 const { data } = guide;
 const guideProducts = data.productIds.map((id) => {
-  const product = productById.get(id);
-  if (!product) throw new Error(`Buying guide "${guide.id}" references unknown product "${id}".`);
-  return product;
+  const candidate = productById.get(id);
+  if (!candidate) throw new Error(`Buying guide "${guide.id}" references unknown product "${id}".`);
+  return candidate;
 });
 const guidePath = `/buying-guides/${guide.id}`;
 const breadcrumbs: BreadcrumbItem[] = [

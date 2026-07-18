@@ -10,7 +10,7 @@ interface Props {
   activeOnly?: boolean;
 }
 
-const { links, stacked = false, preferredVendor, buttonLabel, activeOnly = false } = Astro.props;
+const { links, stacked = false, preferredVendor, buttonLabel } = Astro.props;
 const allVendors = [
   { name: 'Amazon', url: links.amazon, variant: 'conversion' as const },
   { name: 'SunFounder', url: links.sunfounder, variant: 'primary' as const },
@@ -21,18 +21,16 @@ const allVendors = [
   })),
 ];
 const preferred = preferredVendor ? allVendors.filter((vendor) => vendor.name === preferredVendor) : allVendors;
-const vendors = activeOnly ? preferred.filter((vendor) => isActiveAffiliateLink(vendor.url)) : preferred;
+const vendors = preferred.filter((vendor): vendor is (typeof allVendors)[number] & { url: string } => isActiveAffiliateLink(vendor.url));
 ---
 
 {vendors.length > 0 && <div class:list={['grid gap-3', stacked ? 'grid-cols-1' : 'sm:grid-cols-2']}>
   {vendors.map((vendor) => {
-    const active = isActiveAffiliateLink(vendor.url);
     return <Button
-      href={active ? vendor.url : '/recommended-kits'}
-      rel={active ? 'sponsored nofollow noopener noreferrer' : undefined}
-      target={active ? '_blank' : undefined}
-      ariaLabel={`${vendor.name === 'Amazon' ? 'Buy on' : 'Buy from'} ${vendor.name}${active ? ' (opens in a new tab)' : ' (affiliate link awaiting configuration)'}`}
-      ariaDisabled={!active}
+      href={vendor.url}
+      rel="sponsored nofollow noopener noreferrer"
+      target="_blank"
+      ariaLabel={`${vendor.name === 'Amazon' ? 'Buy on' : 'Buy from'} ${vendor.name} (opens in a new tab)`}
       variant={vendor.variant}
       class="w-full"
     >

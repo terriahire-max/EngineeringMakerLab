@@ -5,8 +5,7 @@ updatedDate: 2026-07-15
 description: Build a small, practical toolkit for breadboard projects, testing, and enclosure work.
 summary: Beginners do not need a fully equipped lab. Start with a digital multimeter, small hand tools, reliable jumper wires, and good organization. Add soldering equipment only when your projects move beyond breadboards.
 audience: New makers assembling a safe and useful electronics workspace
-productIds:
-  - ifixit-essential-electronics-toolkit
+productIds: []
 tags: [Tools, Multimeter, Prototyping, Workbench]
 ---
 

@@ -23,7 +23,7 @@ const hasSunFounderLink = isActiveAffiliateLink(product.affiliateLinks.sunfounde
   <p class="mt-3 text-sm leading-6 text-slate-600">{product.shortDescription}</p>
   {product.sellingPoints && <ul class="mt-4 space-y-2">{product.sellingPoints.slice(0, 2).map((point) => <li class="flex gap-2 text-sm text-slate-700"><Icon name="check" size={16} class="mt-0.5 shrink-0 text-blue-700" />{point}</li>)}</ul>}
   <div class="mt-auto pt-5">
-    {hasSunFounderLink ? <><BuyButtons links={product.affiliateLinks} preferredVendor="SunFounder" buttonLabel={getProductCtaLabel(product)} activeOnly={true} stacked={true} /><p class="mt-3 text-xs leading-5 text-slate-500">Affiliate link: Engineering Maker Lab may earn a commission at no additional cost to you.</p></> : <p class="rounded-xl bg-slate-100 p-3 text-center text-sm font-semibold text-slate-600">Product link being prepared</p>}
+    {hasSunFounderLink ? <><BuyButtons links={product.affiliateLinks} preferredVendor="SunFounder" buttonLabel={getProductCtaLabel(product)} activeOnly={true} stacked={true} /><p class="mt-3 text-xs leading-5 text-slate-500">Affiliate link: Engineering Maker Lab may earn a commission at no additional cost to you.</p></> : <p class="rounded-xl bg-slate-100 p-3 text-center text-sm font-semibold text-slate-600">Affiliate link being configured</p>}
     {showDetailLink && <div class="mt-3"><Button href={detailUrl} variant="secondary" class="w-full" ariaLabel={`Explore ${product.name}`}>Explore product <Icon name="arrow-right" /></Button></div>}
   </div>
 </article>

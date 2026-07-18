@@ -7,7 +7,6 @@ summary: The best first kit is the one that matches the board and programming la
 audience: First-time makers choosing between a Pico and Arduino-compatible kit
 productIds:
   - sunfounder-raspberry-pi-pico-ultimate-starter-kit
-  - elegoo-uno-r3-super-starter-kit
 tags: [Starter Kits, Arduino, Raspberry Pi Pico, Beginners]
 ---
 
@@ -28,7 +27,7 @@ Both platforms can teach breadboards, LEDs, buttons, sensors, PWM, and motors. Y
 
 ## Our sample picks
 
-The SunFounder Pico kit is the closest match for the projects in the Start Here path. The ELEGOO UNO R3 Super Starter Kit is a reasonable alternative for a learner who specifically wants the Arduino IDE and UNO-compatible ecosystem.
+The SunFounder Pico kit is the closest match for the projects in the Start Here path.
 
 ## Avoid buying by component count alone
 

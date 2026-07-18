@@ -1,13 +1,13 @@
 ---
 import type { ProductCollection } from '../data/collections';
-import { productById } from '../data/products';
+import { getProductsByCollection } from '../data/products';
 import Button from './design-system/Button.astro';
 import Icon from './design-system/Icon.astro';
 
 interface Props { collection: ProductCollection; headingLevel?: 'h2' | 'h3'; }
 const { collection, headingLevel = 'h3' } = Astro.props;
 const HeadingTag = headingLevel;
-const exampleProducts = collection.productIds.map((id) => productById.get(id)).filter((product) => product !== undefined);
+const exampleProducts = getProductsByCollection(collection.id);
 ---
 
 <article class="surface-card flex h-full flex-col p-6 sm:p-7">

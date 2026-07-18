@@ -42,8 +42,8 @@ export const productCollections: ProductCollection[] = [
   {
     id: 'robotics', name: 'Robotics', icon: 'shield-check', buttonLabel: 'Explore Robotics Kits',
     description: 'Build programmable robot cars, robot dogs, robotic arms, and mobile systems.',
-    productIds: ['sunfounder-4wd-robot-car-pico', 'sunfounder-pidog-robot-dog-kit', 'sunfounder-galaxyrvr-mars-rover-kit', 'sunfounder-picar-x'],
-    recommendedProductIds: ['sunfounder-4wd-robot-car-pico', 'sunfounder-pidog-robot-dog-kit', 'sunfounder-picar-x'],
+    productIds: ['sunfounder-pidog-robot-dog-kit', 'sunfounder-galaxyrvr-mars-rover-kit', 'sunfounder-picar-x'],
+    recommendedProductIds: ['sunfounder-pidog-robot-dog-kit', 'sunfounder-picar-x'],
     skills: ['Motion control', 'Sensor-guided behavior', 'Robot programming'],
     audience: ['Makers ready for moving systems', 'Students exploring robotics', 'Raspberry Pi and Pico programmers'],
     builds: ['Programmable robot cars', 'Quadruped behaviors', 'Navigation and obstacle response'],
@@ -53,8 +53,8 @@ export const productCollections: ProductCollection[] = [
   {
     id: 'ai-vision', name: 'AI and Vision', icon: 'book-open', buttonLabel: 'Explore AI Kits',
     description: 'Experiment with computer vision, multimodal AI, object detection, and intelligent Raspberry Pi projects.',
-    productIds: ['sunfounder-ai-fusion-lab-kit', 'sunfounder-picrawler-ai-robot-kit', 'sunfounder-esp32-camera-pro-kit'],
-    recommendedProductIds: ['sunfounder-ai-fusion-lab-kit', 'sunfounder-picrawler-ai-robot-kit', 'sunfounder-esp32-camera-pro-kit'],
+    productIds: ['sunfounder-ai-fusion-lab-kit', 'sunfounder-picrawler-ai-robot-kit'],
+    recommendedProductIds: ['sunfounder-ai-fusion-lab-kit', 'sunfounder-picrawler-ai-robot-kit'],
     skills: ['Computer vision', 'Multimodal AI', 'Intelligent hardware'],
     audience: ['Makers moving beyond basic circuits', 'Students exploring applied AI', 'Developers connecting vision and hardware'],
     builds: ['Object-detection experiments', 'Vision-guided robots', 'Connected camera projects'],
@@ -76,9 +76,9 @@ export const productCollections: ProductCollection[] = [
   {
     id: 'miscellaneous', name: 'Miscellaneous', icon: 'gauge', buttonLabel: 'Explore Miscellaneous Products',
     description: 'Browse useful electronics accessories, breadboard power supplies, displays, cases, grippers, expansion boards, and other maker tools.',
-    productIds: ['ifixit-essential-electronics-toolkit'],
+    productIds: [],
     exampleLabels: ['Breadboard power accessories', 'Cases and expansion boards', 'Grippers, displays, and maker tools'],
-    recommendedProductIds: ['ifixit-essential-electronics-toolkit'],
+    recommendedProductIds: [],
     skills: ['Workbench organization', 'Power and prototyping', 'Project expansion'],
     audience: ['Makers completing a workbench', 'Students adding project accessories', 'Builders extending existing kits'],
     builds: ['Organized electronics workspaces', 'Powered breadboard prototypes', 'Expanded mechanical and display projects'],

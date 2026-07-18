@@ -18,7 +18,6 @@ const tutorialEntries = await getCollection('tutorials');
 const learningProjects = sortProjectsByLearningPath(projectEntries);
 const learningTutorials = sortTutorialsByLearningPath(tutorialEntries);
 const starterKit = productById.get('sunfounder-raspberry-pi-pico-ultimate-starter-kit');
-
 if (!starterKit) throw new Error('Start Here references a missing starter kit.');
 
 const pageTitle = 'Start Here | Engineering Maker Lab';
