@@ -8,6 +8,8 @@ interface Props { collection: ProductCollection; headingLevel?: 'h2' | 'h3'; }
 const { collection, headingLevel = 'h3' } = Astro.props;
 const HeadingTag = headingLevel;
 const exampleProducts = getProductsByCollection(collection.id);
+const visibleProducts = exampleProducts.slice(0, 3);
+const remainingProductCount = exampleProducts.length - visibleProducts.length;
 ---
 
 <article class="surface-card flex h-full flex-col p-6 sm:p-7">
@@ -16,11 +18,12 @@ const exampleProducts = getProductsByCollection(collection.id);
   <p class="mt-3 text-sm leading-6 text-slate-600">{collection.description}</p>
   <div class="mt-5">
     <p class="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">Example products</p>
-    <ul class="mt-2 space-y-2 text-sm font-semibold leading-5 text-slate-800">{exampleProducts.map((product) => <li>{product.name}</li>)}{collection.exampleLabels?.map((label) => <li>{label}</li>)}</ul>
+    <ul class="mt-2 space-y-2 text-sm font-semibold leading-5 text-slate-800">{visibleProducts.map((product) => <li>{product.name}</li>)}</ul>
+    {remainingProductCount > 0 && <p class="mt-2 text-xs font-semibold text-slate-500">Plus {remainingProductCount} more {remainingProductCount === 1 ? 'product' : 'products'}</p>}
   </div>
   <div class="mt-5">
     <p class="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">Skills and builds</p>
-    <ul class="mt-2 flex flex-wrap gap-2">{collection.skills.map((skill) => <li class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">{skill}</li>)}</ul>
+    <ul class="mt-2 flex flex-wrap gap-2">{collection.skills.slice(0, 3).map((skill) => <li class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">{skill}</li>)}</ul>
   </div>
   <div class="mt-auto pt-6"><Button href={`/collections/${collection.id}`} variant="secondary" class="w-full">{collection.buttonLabel} <Icon name="arrow-right" /></Button></div>
 </article>

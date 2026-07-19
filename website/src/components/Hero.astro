@@ -5,22 +5,21 @@ import Button from './design-system/Button.astro';
 
 <section class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:px-8 lg:py-20">
   <div>
-    <div class="mb-4"><Badge>For students, families, and adult beginners</Badge></div>
+    <div class="mb-4"><Badge>Curated guidance for beginners</Badge></div>
     <h1 class="heading-display max-w-2xl">
-      Choose What You Want to Build
+      Choose Electronics and Robotics Gear With Confidence
     </h1>
     <p class="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
-      Explore beginner-friendly electronics, robotics, AI, and programming kits selected for the projects and skills they make possible.
+      Compare practical maker products by platform, project, and experience level. Every product includes a direct link to official documentation.
     </p>
 
     <div class="mt-8 flex flex-col gap-3 sm:flex-row">
       <Button href="#explore-by-interest" class="w-full sm:w-auto">Explore Collections</Button>
-      <Button href="#featured-product" variant="secondary" class="w-full sm:w-auto">See Recommended Products</Button>
+      <Button href="/start-here" variant="secondary" class="w-full sm:w-auto">Start Here</Button>
     </div>
   </div>
 
-  <div class="rounded-[var(--radius-card)] bg-gradient-to-br from-blue-700 to-sky-500 p-[1px] shadow-[var(--shadow-elevated)]">
-    <div class="rounded-[calc(1.5rem-1px)] bg-white p-6 sm:p-8">
+  <div class="surface-card border-t-4 border-t-blue-700 p-6 sm:p-8">
       <div class="grid gap-4 sm:grid-cols-2">
         <a href="#explore-by-interest" aria-label="Explore kit categories" class="rounded-2xl bg-slate-50 p-5 transition hover:bg-blue-50">
           <p class="text-sm font-semibold text-slate-500">Get equipped</p>
@@ -41,6 +40,5 @@ import Button from './design-system/Button.astro';
           </p>
         </div>
       </div>
-    </div>
   </div>
 </section>

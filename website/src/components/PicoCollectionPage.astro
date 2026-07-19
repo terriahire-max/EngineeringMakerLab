@@ -55,7 +55,7 @@ if (import.meta.env.DEV) kits.filter((kit) => !kit.active).forEach((kit) => cons
       <div class="mt-7 grid gap-3 sm:grid-cols-2 lg:flex lg:flex-wrap">
         <Button href={`/products/${product.id}`} variant="secondary" class="w-full lg:w-auto">View {profile.comparisonLabel} Details</Button>
         {active && <div class="w-full sm:col-span-2 lg:w-auto"><BuyButtons links={product.affiliateLinks} preferredVendor="SunFounder" buttonLabel={getProductCtaLabel(product)} activeOnly={true} /></div>}
-        <Button href={profile.officialDocumentationUrl} target="_blank" rel="noopener noreferrer" variant="secondary" class="w-full lg:w-auto" ariaLabel={`Open the official ${profile.comparisonLabel} documentation (opens in a new tab)`}>Official documentation</Button>
+        <Button href={profile.officialDocumentationUrl} target="_blank" rel="noopener noreferrer" variant="secondary" class="w-full lg:w-auto" ariaLabel={`Open the official ${profile.comparisonLabel} documentation (opens in a new tab)`}>View Official Documentation</Button>
       </div>
       {active && <p class="mt-4 text-xs leading-5 text-slate-500">Affiliate link: Engineering Maker Lab may earn a commission at no additional cost to you.</p>}
     </section>

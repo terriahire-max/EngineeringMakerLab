@@ -2,10 +2,10 @@
 import type { GetStaticPaths } from 'astro';
 import PageLayout from '../../../layouts/PageLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
-import ProductRecommendationCard from '../../../components/ProductRecommendationCard.astro';
+import BuyButtons from '../../../components/BuyButtons.astro';
 import AffiliateDisclosure from '../../../components/AffiliateDisclosure.astro';
 import Icon from '../../../components/design-system/Icon.astro';
-import { products, type Product } from '../../../data/products';
+import { getProductCtaLabel, products, type Product } from '../../../data/products';
 import { collectionById } from '../../../data/collections';
 import type { BreadcrumbItem } from '../../../utils/seo';
 import Button from '../../../components/design-system/Button.astro';
@@ -23,13 +23,21 @@ const breadcrumbs: BreadcrumbItem[] = [{ label: 'Home', href: '/' }, { label: 'C
 <PageLayout title={`${product.name} | Engineering Maker Lab`} description={`${product.shortDescription} Review its learning focus, possible projects, and affiliate-link availability.`} breadcrumbs={breadcrumbs}>
   <section class="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
     <Breadcrumbs items={breadcrumbs} />
-    <header class="mt-8 max-w-3xl"><p class="eyebrow">Product overview</p><h1 class="heading-display mt-3">{product.name}</h1><p class="mt-5 text-lg leading-8 text-slate-600">{product.shortDescription}</p></header>
-    <div class="mt-10"><ProductRecommendationCard product={product} headingLevel="h2" showDetailLink={false} /></div>
-    {product.documentationUrl && <div class="mt-4"><Button href={product.documentationUrl} target="_blank" rel="noopener noreferrer" variant="secondary" ariaLabel={`Open the official documentation for ${product.name} (opens in a new tab)`}>Official Documentation</Button></div>}
+    <header class="mt-8 rounded-[var(--radius-card)] border border-slate-200 bg-white p-6 sm:p-8 lg:p-10">
+      <p class="eyebrow">{product.platform} · {product.level}</p>
+      <h1 class="heading-display mt-3 max-w-4xl">{product.name}</h1>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-slate-600">{product.shortDescription}</p>
+      <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+        <div class="w-full sm:w-auto"><BuyButtons links={product.affiliateLinks} preferredVendor="SunFounder" buttonLabel={getProductCtaLabel(product)} activeOnly={true} /></div>
+        {product.documentationUrl && <Button href={product.documentationUrl} target="_blank" rel="noopener noreferrer" variant="secondary" class="w-full sm:w-auto" ariaLabel={`Open the official documentation for ${product.name} (opens in a new tab)`}>View Official Documentation</Button>}
+      </div>
+      <p class="mt-4 text-xs leading-5 text-slate-500">Affiliate link: Engineering Maker Lab may earn a commission at no additional cost to you.</p>
+    </header>
     <div class="mt-10 grid gap-6 md:grid-cols-2">
       <section aria-labelledby="selling-points" class="rounded-2xl border border-slate-200 p-6"><h2 id="selling-points" class="text-2xl font-black text-slate-900">Learning Value</h2><ul class="mt-4 space-y-3">{(product.sellingPoints ?? []).map((point) => <li class="flex gap-2 text-sm leading-6 text-slate-700"><Icon name="check" size={17} class="mt-1 shrink-0 text-blue-700" />{point}</li>)}</ul></section>
       <section aria-labelledby="project-ideas" class="rounded-2xl border border-slate-200 p-6"><h2 id="project-ideas" class="text-2xl font-black text-slate-900">Projects and Learning Possibilities</h2><ul class="mt-4 space-y-3">{(product.highlightedProjects ?? []).map((project) => <li class="flex gap-2 text-sm leading-6 text-slate-700"><Icon name="arrow-right" size={17} class="mt-1 shrink-0 text-blue-700" />{project}</li>)}</ul></section>
     </div>
+    <aside class="mt-6 rounded-2xl border border-blue-100 bg-blue-50 p-5" aria-labelledby="why-included"><h2 id="why-included" class="text-lg font-bold text-slate-900">Why it is included</h2><p class="mt-2 text-sm leading-6 text-slate-700">Engineering Maker Lab includes products that have official documentation and support practical electronics, robotics, or programming learning.</p></aside>
     <div class="mt-10"><AffiliateDisclosure /></div>
   </section>
 </PageLayout>

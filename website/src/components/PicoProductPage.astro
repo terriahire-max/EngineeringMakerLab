@@ -33,7 +33,7 @@ const breadcrumbs: BreadcrumbItem[] = [{ label: 'Home', href: '/' }, { label: 'C
       <p class="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{profile.explanation}</p>
       <div class="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
         {activeAffiliate && <div class="w-full sm:w-auto"><BuyButtons links={product.affiliateLinks} preferredVendor="SunFounder" buttonLabel={getProductCtaLabel(product)} activeOnly={true} /></div>}
-        <Button href={profile.officialDocumentationUrl} target="_blank" rel="noopener noreferrer" variant="inverse" class="w-full sm:w-auto" ariaLabel={`Open the official ${profile.comparisonLabel} documentation (opens in a new tab)`}>Official documentation</Button>
+        <Button href={profile.officialDocumentationUrl} target="_blank" rel="noopener noreferrer" variant="inverse" class="w-full sm:w-auto" ariaLabel={`Open the official ${profile.comparisonLabel} documentation (opens in a new tab)`}>View Official Documentation</Button>
       </div>
       {activeAffiliate && <p class="mt-4 text-xs leading-5 text-slate-300">Affiliate link: Engineering Maker Lab may earn a commission at no additional cost to you.</p>}
     </header>
@@ -51,6 +51,8 @@ const breadcrumbs: BreadcrumbItem[] = [{ label: 'Home', href: '/' }, { label: 'C
         return <li class="flex gap-2 text-sm leading-6 text-slate-700"><Icon name="arrow-right" size={17} class="mt-1 shrink-0 text-blue-700" /><span>{href ? <a href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined} class="font-semibold text-blue-700 underline decoration-blue-200 underline-offset-4 hover:text-blue-900 visited:text-purple-700">{project.title}{external && ` — ${project.officialGuideLabel ?? 'Official Guide'}`}</a> : <>{project.title} <span class="ml-1 text-xs font-bold uppercase tracking-wide text-slate-500">Planned</span></>}</span></li>;
       })}</ul></section>
     </div>
+
+    <aside class="mt-6 rounded-2xl border border-blue-100 bg-blue-50 p-5" aria-labelledby="why-included"><h2 id="why-included" class="text-lg font-bold text-slate-900">Why it is included</h2><p class="mt-2 text-sm leading-6 text-slate-700">Engineering Maker Lab includes products that have official documentation and support practical electronics, robotics, or programming learning.</p></aside>
 
     <div class="mt-10"><AffiliateDisclosure /></div>
   </section>
