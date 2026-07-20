@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import PageLayout from '../layouts/PageLayout.astro';
-import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 import FeaturedProduct from '../components/FeaturedProduct.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import TutorialCard from '../components/TutorialCard.astro';
@@ -56,7 +55,6 @@ const beginnerAudiences = ['Middle School', 'High School', 'Adult Beginners', 'H
           <div><p class="text-sm font-bold uppercase tracking-[0.15em] text-blue-700">First</p><h2 class="text-3xl font-bold text-slate-900">Buy one recommended kit</h2></div>
         </div>
         <FeaturedProduct product={starterKit} />
-        <div class="mt-6"><AffiliateDisclosure /></div>
       </li>
 
       <li class="flex justify-center text-blue-300" aria-hidden="true"><Icon name="arrow-right" size={36} class="rotate-90" /></li>

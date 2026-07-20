@@ -1,7 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import PageLayout from './PageLayout.astro';
-import AffiliateDisclosure from '../components/AffiliateDisclosure.astro';
 import CircuitDiagramPlaceholder from '../components/CircuitDiagramPlaceholder.astro';
 import CodeExample from '../components/CodeExample.astro';
 import FAQ from '../components/FAQ.astro';
@@ -76,7 +75,6 @@ const socialImage = showOriginalVisuals && data.featuredImage.src ? { src: data.
       {data.relatedProjects.length > 0 && <ProjectSection id="related" eyebrow="Keep building" title="Related Projects"><RelatedProjects projects={data.relatedProjects} /></ProjectSection>}
 
       <ProjectCompletionCTA previousProject={previousProject} nextProject={nextProject} nextPlannedProject={data.nextPlannedProject} />
-      <AffiliateDisclosure />
     </div>
   </article>
 </PageLayout>

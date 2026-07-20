@@ -1,9 +1,10 @@
 export const siteNavigation = [
+  { label: 'Home', href: '/' },
   { label: 'Collections', href: '/collections' },
   { label: 'Products', href: '/products' },
   { label: 'Projects', href: '/projects' },
-  { label: 'Tutorials', href: '/tutorials' },
   { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const footerDisclosure =

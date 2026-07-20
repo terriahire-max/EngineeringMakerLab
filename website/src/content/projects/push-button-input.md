@@ -74,7 +74,7 @@ faq:
 relatedTutorials:
   - { title: GPIO Explained, href: /tutorials/gpio-explained }
   - { title: Breadboard Basics, href: /tutorials/breadboard-basics }
-relatedBuyingGuide: { title: Best Raspberry Pi Pico Starter Kit, href: /buying-guides/best-raspberry-pi-pico-starter-kit }
+relatedBuyingGuide: { title: Raspberry Pi Pico Collection, href: /collections/raspberry-pi-pico }
 relatedProjects:
   - { title: Blink an LED, description: Review the first GPIO output project., difficulty: Beginner, href: /projects/blink-led }
   - { title: Traffic Light, description: Use several LED outputs in a timed sequence., difficulty: Beginner, href: /projects/traffic-light }

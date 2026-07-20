@@ -66,7 +66,7 @@ faq:
 relatedTutorials:
   - { title: Breadboard Basics, href: /tutorials/breadboard-basics }
   - { title: GPIO Explained, href: /tutorials/gpio-explained }
-relatedBuyingGuide: { title: Best Raspberry Pi Pico Starter Kit, href: /buying-guides/best-raspberry-pi-pico-starter-kit }
+relatedBuyingGuide: { title: Raspberry Pi Pico Collection, href: /collections/raspberry-pi-pico }
 relatedProjects:
   - { title: Push Button Input, description: Read a digital input and use it to control an LED., difficulty: Beginner, href: /projects/push-button-input }
   - { title: Traffic Light, description: Coordinate three LEDs to create a timed signal sequence., difficulty: Beginner, href: /projects/traffic-light }

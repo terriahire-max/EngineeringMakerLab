@@ -1,6 +1,5 @@
 ---
 import { siteNavigation } from '../data/site';
-import Button from './design-system/Button.astro';
 import Logo from './design-system/Logo.astro';
 
 const currentPath = Astro.url.pathname;
@@ -23,6 +22,5 @@ const isCurrent = (href: string) => href === '/' ? currentPath === '/' : current
       ))}
     </nav>
 
-    <Button href="/start-here" variant="conversion" class="shrink-0 px-4">Start Here</Button>
   </div>
 </header>

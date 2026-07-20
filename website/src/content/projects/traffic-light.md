@@ -63,7 +63,7 @@ faq:
 relatedTutorials:
   - { title: GPIO Explained, href: /tutorials/gpio-explained }
   - { title: Breadboard Basics, href: /tutorials/breadboard-basics }
-relatedBuyingGuide: { title: Best Raspberry Pi Pico Starter Kit, href: /buying-guides/best-raspberry-pi-pico-starter-kit }
+relatedBuyingGuide: { title: Raspberry Pi Pico Collection, href: /collections/raspberry-pi-pico }
 relatedProjects:
   - { title: Blink an LED, description: Start with one GPIO output., difficulty: Beginner, href: /projects/blink-led }
   - { title: Password Lock, description: Combine multiple inputs and outputs., difficulty: Intermediate, href: /projects/password-lock }

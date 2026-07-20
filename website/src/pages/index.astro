@@ -2,15 +2,18 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/Hero.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import KitShowcase from '../components/KitShowcase.astro';
+import ProductCard from '../components/ProductCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import CollectionCard from '../components/CollectionCard.astro';
 import { productById } from '../data/products';
 import { productCollections } from '../data/collections';
 import Button from '../components/design-system/Button.astro';
 import WhyTrust from '../components/WhyTrust.astro';
+import { getCollection } from 'astro:content';
 
 const thalesKit = productById.get('sunfounder-thales-pico-starter-kit');
 if (!thalesKit) throw new Error('The Thales starter kit product entry is missing.');
+const featuredProject = (await getCollection('projects')).find((project) => project.id === 'blink-led');
 
 const pageTitle = 'Beginner Electronics, Robotics and AI Kits | Engineering Maker Lab';
 const pageDescription = 'Explore beginner electronics, Raspberry Pi, Arduino, robotics, AI, and maker accessory collections organized around practical projects and skills.';
@@ -23,13 +26,16 @@ const pageDescription = 'Explore beginner electronics, Raspberry Pi, Arduino, ro
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <SectionHeading eyebrow="Choose an area of interest" title="Explore by Interest" description="Start with what you want to make, then compare the kits, skills, and project possibilities in that collection." />
       <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">{productCollections.map((collection) => <CollectionCard collection={collection} />)}</div>
-      <div class="mt-8"><Button href="/collections" variant="secondary">View all collections</Button></div>
     </div>
   </section>
 
-  <section id="featured-product" class="mx-auto max-w-6xl scroll-mt-24 px-4 py-16 sm:px-6 lg:px-8">
-    <SectionHeading eyebrow="Recommended product" title="Featured Beginner Pick" description="The Thales kit remains our primary individual recommendation for beginners who want to combine MicroPython with hands-on circuits." />
-    <div class="mt-10"><KitShowcase product={thalesKit} titleLevel="h3" compact={true} summaryOnly={true} /></div>
+  <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+    <SectionHeading eyebrow="How the site helps" title="Choose, verify, then build" description="Browse a collection, compare concise product pages, use the manufacturer documentation for technical instructions, and explore a focused project when you are ready." />
+    <div class="mt-10 grid gap-6 lg:grid-cols-2">
+      <div><ProductCard product={thalesKit} /></div>
+      {featuredProject && <ProjectCard title={featuredProject.data.title} description={featuredProject.data.description} tag={featuredProject.data.difficulty} href={`/projects/${featuredProject.id}`} />}
+    </div>
+    <div class="mt-8 flex flex-wrap gap-3"><Button href="/products" variant="secondary">View all products</Button><Button href="/projects" variant="secondary">View all projects</Button></div>
   </section>
 
   <section class="mx-auto max-w-6xl px-4 pb-16 sm:px-6 lg:px-8"><WhyTrust /></section>

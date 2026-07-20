@@ -79,7 +79,7 @@ relatedTutorials:
   - { title: GPIO Explained, href: /tutorials/gpio-explained }
   - { title: PWM Explained, href: /tutorials/pwm-explained }
   - { title: Servo Motors, href: /tutorials/servo-motors }
-relatedBuyingGuide: { title: Best Raspberry Pi Pico Starter Kit, href: /buying-guides/best-raspberry-pi-pico-starter-kit }
+relatedBuyingGuide: { title: Raspberry Pi Pico Collection, href: /collections/raspberry-pi-pico }
 relatedProjects:
   - { title: Servo Motor Control, description: Learn the lock actuator first., difficulty: Beginner, href: /projects/servo-motor-control }
   - { title: Traffic Light, description: Practice coordinating several outputs., difficulty: Beginner, href: /projects/traffic-light }

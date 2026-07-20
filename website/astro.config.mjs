@@ -25,6 +25,20 @@ for (const collection of ['projects', 'tutorials', 'buying-guides']) {
 
 export default defineConfig({
   site,
+  redirects: {
+    '/recommended-kits': '/collections',
+    '/buying-guides/best-raspberry-pi-pico-starter-kit': '/collections/raspberry-pi-pico',
+    '/products/starter-kits': '/products',
+    '/products/raspberry-pi-pico': '/collections/raspberry-pi-pico',
+    '/products/arduino': '/collections/arduino',
+    '/products/sensors': '/products',
+    '/products/displays': '/products',
+    '/products/motors': '/products',
+    '/products/breadboards': '/products',
+    '/products/tools': '/products',
+    '/products/power': '/products',
+    '/products/accessories': '/products',
+  },
   integrations: [sitemap({
     serialize(item) {
       const pathname = new URL(item.url).pathname.replace(/\/$/, '') || '/';

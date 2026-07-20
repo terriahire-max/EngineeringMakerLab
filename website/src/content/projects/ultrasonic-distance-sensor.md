@@ -69,7 +69,7 @@ faq:
 relatedTutorials:
   - { title: GPIO Explained, href: /tutorials/gpio-explained }
   - { title: Power Supplies, href: /tutorials/power-supplies }
-relatedBuyingGuide: { title: Best Raspberry Pi Pico Starter Kit, href: /buying-guides/best-raspberry-pi-pico-starter-kit }
+relatedBuyingGuide: { title: Raspberry Pi Pico Collection, href: /collections/raspberry-pi-pico }
 relatedProjects:
   - { title: Servo Motor Control, description: Add controlled movement to a sensor platform., difficulty: Beginner, href: /projects/servo-motor-control }
   - { title: Traffic Light, description: Turn distance ranges into colored indicators., difficulty: Beginner, href: /projects/traffic-light }

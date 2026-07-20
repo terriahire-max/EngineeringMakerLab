@@ -63,7 +63,7 @@ relatedTutorials:
   - { title: PWM Explained, href: /tutorials/pwm-explained }
   - { title: Servo Motors, href: /tutorials/servo-motors }
   - { title: Power Supplies, href: /tutorials/power-supplies }
-relatedBuyingGuide: { title: Best Raspberry Pi Pico Starter Kit, href: /buying-guides/best-raspberry-pi-pico-starter-kit }
+relatedBuyingGuide: { title: Raspberry Pi Pico Collection, href: /collections/raspberry-pi-pico }
 relatedProjects:
   - { title: Password Lock, description: Use a servo as a lock actuator., difficulty: Intermediate, href: /projects/password-lock }
   - { title: Blink an LED, description: Review basic GPIO output control., difficulty: Beginner, href: /projects/blink-led }

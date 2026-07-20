@@ -28,6 +28,7 @@ const htmlFiles = files.filter((file) => file.endsWith('.html'));
 const errors = [];
 const values = { titles: [], descriptions: [], canonicals: [] };
 const routes = new Map();
+const redirectRoutes = new Set();
 const schemaCounts = new Map();
 
 for (const file of htmlFiles) {
@@ -38,6 +39,10 @@ for (const file of htmlFiles) {
 
 for (const [route, file] of routes) {
   const html = fs.readFileSync(file, 'utf8');
+  if (/<meta\s+http-equiv="refresh"/i.test(html) && /<meta\s+name="robots"\s+content="noindex"/i.test(html)) {
+    redirectRoutes.add(route);
+    continue;
+  }
   const title = html.match(/<title>(.*?)<\/title>/is)?.[1]?.trim();
   const description = html.match(/<meta\s+name="description"\s+content="([^"]*)"/i)?.[1]?.trim();
   const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]*)"/i)?.[1]?.trim();
@@ -141,8 +146,9 @@ else {
 const sitemapFile = files.find((file) => /sitemap-\d+\.xml$/.test(file));
 const sitemapText = sitemapFile ? fs.readFileSync(sitemapFile, 'utf8') : '';
 const sitemapUrls = [...sitemapText.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
-if (sitemapUrls.length !== htmlFiles.length) {
-  errors.push(`sitemap has ${sitemapUrls.length} URLs for ${htmlFiles.length} HTML pages`);
+const contentPageCount = htmlFiles.length - redirectRoutes.size;
+if (sitemapUrls.length !== contentPageCount) {
+  errors.push(`sitemap has ${sitemapUrls.length} URLs for ${contentPageCount} indexable HTML pages`);
 }
 const canonicalSet = new Set(values.canonicals.map(([value]) => value));
 for (const sitemapUrl of sitemapUrls) {
@@ -151,6 +157,7 @@ for (const sitemapUrl of sitemapUrls) {
 
 const report = {
   htmlPages: htmlFiles.length,
+  redirectPages: redirectRoutes.size,
   uniqueTitles: new Set(values.titles.map(([value]) => value)).size,
   uniqueDescriptions: new Set(values.descriptions.map(([value]) => value)).size,
   uniqueCanonicals: new Set(values.canonicals.map(([value]) => value)).size,

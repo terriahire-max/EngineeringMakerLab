@@ -3,7 +3,6 @@ import type { GetStaticPaths } from 'astro';
 import PageLayout from '../../../layouts/PageLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import BuyButtons from '../../../components/BuyButtons.astro';
-import AffiliateDisclosure from '../../../components/AffiliateDisclosure.astro';
 import Icon from '../../../components/design-system/Icon.astro';
 import { getProductCtaLabel, products, type Product } from '../../../data/products';
 import { collectionById } from '../../../data/collections';
@@ -38,6 +37,5 @@ const breadcrumbs: BreadcrumbItem[] = [{ label: 'Home', href: '/' }, { label: 'C
       <section aria-labelledby="project-ideas" class="rounded-2xl border border-slate-200 p-6"><h2 id="project-ideas" class="text-2xl font-black text-slate-900">Projects and Learning Possibilities</h2><ul class="mt-4 space-y-3">{(product.highlightedProjects ?? []).map((project) => <li class="flex gap-2 text-sm leading-6 text-slate-700"><Icon name="arrow-right" size={17} class="mt-1 shrink-0 text-blue-700" />{project}</li>)}</ul></section>
     </div>
     <aside class="mt-6 rounded-2xl border border-blue-100 bg-blue-50 p-5" aria-labelledby="why-included"><h2 id="why-included" class="text-lg font-bold text-slate-900">Why it is included</h2><p class="mt-2 text-sm leading-6 text-slate-700">Engineering Maker Lab includes products that have official documentation and support practical electronics, robotics, or programming learning.</p></aside>
-    <div class="mt-10"><AffiliateDisclosure /></div>
   </section>
 </PageLayout>

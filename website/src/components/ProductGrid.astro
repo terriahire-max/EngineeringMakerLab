@@ -19,10 +19,10 @@ const { products, emptyMessage = 'No reviewed products are listed in this catego
 ) : (
   <Card class="border-dashed p-8 text-center sm:p-10">
     <p class="text-sm font-semibold text-slate-700">{emptyMessage}</p>
-    <p class="mt-2 text-sm text-slate-500">Explore the reviewed catalog or follow the beginner path with the recommended starter kit.</p>
+    <p class="mt-2 text-sm text-slate-500">Explore the complete catalog or browse by collection.</p>
     <div class="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
       <Button href="/products" variant="secondary">View all products</Button>
-      <Button href="/start-here">Start the beginner path</Button>
+      <Button href="/collections">View collections</Button>
     </div>
   </Card>
 )}

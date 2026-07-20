@@ -57,7 +57,7 @@ faq:
     answer: "Suggest one safe, achievable experiment using the same hardware."
 relatedTutorials:
   - { title: "GPIO Explained", href: "/tutorials/gpio-explained" }
-relatedBuyingGuide: { title: "Best Raspberry Pi Pico Starter Kit", href: "/buying-guides/best-raspberry-pi-pico-starter-kit" }
+relatedBuyingGuide: { title: "Raspberry Pi Pico Collection", href: "/collections/raspberry-pi-pico" }
 relatedProjects: []
 ---
 
